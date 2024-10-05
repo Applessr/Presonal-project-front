@@ -31,7 +31,7 @@ const Footer = () => {
         </div>
         </div>
     </div>
-    <h1 className='ml-24 text-l mt-8 mb-10 text-center'>©2024  All Rights Reserved.</h1>
+    <h1 className='ml-24 text-l mt-8 mb-10 text-center'>©2024 Spanify  All Rights Reserved.</h1>
 </div>
   )
 }

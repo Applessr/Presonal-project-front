@@ -45,8 +45,8 @@ const Register = () => {
   };
 
   return (
-    <div className='text-[#22A094] bg-[#E2FAF8] w-full h-screen'>
-      <div className='border w-[40%] m-auto bg-white rounded-lg shadow-lg'>
+    <div className='text-[#22A094] bg-[#E2FAF8] w-full h-screen pt-40'>
+      <div className='border w-[40%] m-auto bg-white rounded-lg shadow-lg '>
         <img className='w-36 ml-56 mt-10' src="https://i.imgur.com/yGPYlKm.png" alt="External Logo" />
         <form
           onSubmit={hdlSubmit}
@@ -73,7 +73,7 @@ const Register = () => {
           )}
           <span className="text-[#6e6e6ec8] mt-6">รหัสผ่าน</span>
           <input
-            className="border border-[#6e6e6ec1] p-2 rounded-md mb-10"
+            className="border border-[#6e6e6ec1] p-2 rounded-md"
             type="password"
             name='password'
             onChange={hdlOnChange}
@@ -82,7 +82,7 @@ const Register = () => {
           {formErrors.password && (
             <span className='text-red-500 text-xs'>{formErrors.password}</span>
           )}
-          <button className="border-2 border-[#22A094] rounded-md p-2 mb-8">ลงทะเบียน</button>
+          <button className="border-2 border-[#22A094] rounded-md p-2 mt-8 mb-8">ลงทะเบียน</button>
         </form>
       </div>
     </div>

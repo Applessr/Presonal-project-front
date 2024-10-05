@@ -33,10 +33,9 @@ const Translator = () => {
     };
   return (
     
-    <div className="w-full h-auto text-center text-[#22A094]">
-
-      <div className='flex justify-center mt-10'>
-        <div className='w-[50%] bg-[#E2FAF8] rounded-lg'>
+    <div className="w-full min-h-screen text-center text-[#22A094]">
+      <div className='flex justify-center'>
+        <div className='w-[50%] bg-[#E2FAF8] rounded-lg mt-24'>
           <div className='flex gap-4 m-4'>
             <label htmlFor="sourceLang" className="text-2xl mb-2">ภาษาต้นทาง:</label>
             <select

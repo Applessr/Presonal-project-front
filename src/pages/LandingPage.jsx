@@ -15,9 +15,9 @@ function LandingPage() {
       <TranslatorInput />
     </div>
     <WordDay/>
-    <h1 className='text-3xl font-semibold mt-16 mb-16'>บทเรียนภาษาสเปน</h1>
+    <h1 className='text-3xl font-semibold mt-16 mb-10'>บทเรียนภาษาสเปน</h1>
     <Lesson/>
-    <h1 className='text-3xl font-semibold mt-16 mb-16'>คำศัพท์ยอดฮิต</h1>
+    <h1 className='text-3xl font-semibold mb-16'>คำศัพท์ยอดฮิต</h1>
     <Hotvocap/>
     <Footer/>
   </div>

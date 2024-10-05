@@ -1,6 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import UserAvatar from '../UserAvatar'
+import UserDropdown from '../user/UserDropdown'
 
 const AdminHeader = () => {
   return (
@@ -11,7 +12,7 @@ const AdminHeader = () => {
             <img src="https://i.imgur.com/yGPYlKm.png" alt="External Logo" />
           </div>
           <nav className='flex gap-8 items-baseline mt-1 text-[#22A094]'>
-            <UserAvatar/>
+            <UserDropdown/>
           </nav>
         </div>
       </div>

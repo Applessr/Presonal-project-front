@@ -7,6 +7,7 @@ import { toast } from "react-toastify";
 const useAuthStore = create(persist((set)=> ({
     user: null,
     token: null,
+    searchTerm: '',
     actionRegister: async(form) => {
         try {
             const res = await register(form)
@@ -33,9 +34,12 @@ const useAuthStore = create(persist((set)=> ({
     actionLogout: ()=>{
         localStorage.clear()
         set({user: null, token: null })
+    },
+    actionSearchTerm: () => {
+        
     }
 }),{
-    name:'user-store',
+    name:'auth-store',
     storage: createJSONStorage(()=> localStorage)
 }));
 

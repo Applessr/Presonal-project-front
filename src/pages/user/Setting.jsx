@@ -1,11 +1,11 @@
 import React from 'react'
 
-const Lesson = () => {
+const Setting = () => {
   return (
     <div>
-      Lesson
+      Setting
     </div>
   )
 }
 
-export default Lesson
+export default Setting

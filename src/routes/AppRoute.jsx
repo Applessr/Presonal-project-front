@@ -13,9 +13,16 @@ import Dashboard from '../pages/admin/Dashboard';
 import ManageUser from '../pages/admin/ManageUser';
 import ManageVocap from '../pages/admin/ManageVocap';
 import UserFavorite from '../pages/user/UserFavorite';
-import UserProfile from '../pages/user/UserProfile';
+import UserProfile from '../pages/user/UserEditProfile';
 import MainVocab from '../pages/user/MainVocab';
 import Lesson from '../components/landingPage/Lesson';
+import Setting from '../pages/user/Setting';
+import ProtectRoute from './ProtectRoute';
+import UserLesson from '../pages/user/Userlesson';
+import UserEditProfile from '../pages/user/UserEditProfile';
+import LessonById from '../pages/user/LessonById';
+import ForgetPassword from '../pages/auth/ForgetPassword';
+import ResetPassword from '../pages/auth/ResetPassword';
 
 
 const guestRouter = createBrowserRouter([
@@ -27,13 +34,15 @@ const guestRouter = createBrowserRouter([
             { path: '/translate', element: <Translator/>},
             { path: 'register', element: <Register/>},
             { path: 'login', element: <Login/>},
+            { path: 'forget-password', element: <ForgetPassword/>},
+            { path: 'reset-password', element: <ResetPassword/>},
             { path: 'unauthorization', element: <Unauthorized/>},
             { path: '*', element: <PageNotFound/>},
         ],
     },
     {
         path : '/admin',
-        element: < AdminLayout/>,
+        element: <ProtectRoute element={<AdminLayout/>} allow={["ADMIN"]}/>,
         children: [
             { index: true, element: <Dashboard/>},
             { path: 'manages', element: <ManageUser/>},
@@ -42,13 +51,17 @@ const guestRouter = createBrowserRouter([
     },
     {
         path : '/user',
-        element: < UserLayout/>,
+        element: <ProtectRoute element={< UserLayout/>} allow={["USER","ADMIN"]}/>,
         children: [
             { index: true, element: <LandingPage/>},
+            { path: 'translate', element: <Translator/>},
             { path: 'user-favorite', element: <UserFavorite/>},
-            { path: 'user-profile', element: <UserProfile/>},
-            { path: 'vocabulary', element: <MainVocab/>},
-            { path: 'lesson', element: <Lesson/>},
+            { path: 'user-edit-profile', element: <UserEditProfile/>},
+            { path: 'category', element: <MainVocab/>},
+            { path: 'category/vocabulary', element: <MainVocab/>},
+            { path: 'lesson', element: <UserLesson/>},
+            { path: 'lesson/:lessonId', element: <LessonById/>},
+   
         ],
     },
 ]);

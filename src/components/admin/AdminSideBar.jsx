@@ -18,8 +18,8 @@ const AdminSideBar = () => {
     actionLogout();
     navigate('/')
   }
-  const user = useAuthStore((state) => state.user);
 
+  const user = useAuthStore((state) => state.user);
   const firstLetter = user.user?.username ? user.user.username.charAt(0).toUpperCase() : '?';
 
   return (

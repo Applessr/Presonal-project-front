@@ -19,7 +19,7 @@ const Lesson = () => {
             document.getElementById('login_modal').showModal(); 
         } else {
           
-            navigate(`/user/lesson/${lessonId}`);
+            navigate(`/lesson/${lessonId}`);
         }
     }
 

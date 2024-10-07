@@ -18,7 +18,7 @@ const UserLesson = () => {
   }, [token, getAllLesson]);
 
   const hdlLessonClick = (lessonId) => {
-    navigate(`/user/lesson/${lessonId}`);
+    navigate(`/lesson/${lessonId}`);
   }
 
   return (

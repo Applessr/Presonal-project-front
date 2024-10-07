@@ -1,7 +1,6 @@
 import axios from 'axios'
 
 
-
 export const getUserPro = (token) => {
     return axios.get('http://localhost:5000/user', {
         headers: {
@@ -16,8 +15,36 @@ export const upDateUserPro = (token,body) => {
         }
     });
 }
+export const deleteUserPro = (token) => {
+    return axios.delete('http://localhost:5000/user', {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+}
 export const lesson = (token) => {
     return axios.get('http://localhost:5000/user/lessons/', {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+}
+export const category = (token) => {
+    return axios.get('http://localhost:5000/user/vocabulary', {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+}
+export const allVocab = (token) => {
+    return axios.get('http://localhost:5000/user/allVocabulary', {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+}
+export const vocabulary = (token, categoryId) => {
+    return axios.get('http://localhost:5000/user/vocabulary/'+ categoryId, {
         headers: {
             Authorization: `Bearer ${token}`
         }

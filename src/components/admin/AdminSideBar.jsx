@@ -53,7 +53,7 @@ const AdminSideBar = () => {
 
             <div className=''>
                 <div className='text-lg hover:bg-[#e9e9e9] p-3 pl-10'>
-                    <button className='flex gap-1'>
+                    <button onClick={()=> navigate('/user/user-edit-profile')} className='flex gap-1'>
                     <IoSettingsOutline className='w-8 h-8' /> Setting
                     </button>
                 </div>

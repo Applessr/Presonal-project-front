@@ -19,7 +19,6 @@ const Login = () => {
   });
   const [formErrors, setFormErrors] = useState({});
 
-
   const hdlIsRegister = () => {
     document.getElementById('login_modal').close(); 
     navigate('/register'); 

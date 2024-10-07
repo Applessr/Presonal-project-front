@@ -22,7 +22,7 @@ const ResetPasswordPage = () => {
     return password.length >= 6; 
   };
 
-  const hdlSubmit = async (e) => {
+  const hdlSubmit = (e) => {
     e.preventDefault();
     if (!isValidPassword(newPassword)) {
       toast.error('password much be contained at lead 6 character');

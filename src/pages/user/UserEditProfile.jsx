@@ -1,16 +1,19 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import useUserStore from '../../store/user-store';
 import useAuthStore from '../../store/auth-store';
 import { toast } from 'react-toastify';
 
 const UserEditProfile = () => {
+  const navigate = useNavigate();
+  const actionLogout = useAuthStore((state) => state.actionLogout);
   const upDateUserProfile = useUserStore((state) => state.upDateUserProfile);
   const getUserInformation = useUserStore((state) => state.getUserInformation);
+  const deleteUserProfile = useUserStore((state) => state.deleteUserProfile);
   const userProfile = useUserStore((state) => state.userProfile);
   const token = useAuthStore((state) => state.token);
-
+  const [loading, setLoading] = useState(false);
   const [form, setForm] = useState({
     username: userProfile.username,
     email: userProfile.email,
@@ -25,6 +28,17 @@ const UserEditProfile = () => {
     }
   }, [token, getUserInformation]);
 
+  useEffect(() => {
+    if (userProfile) {
+      setForm({
+        username: userProfile.username,
+        email: userProfile.email,
+        currentPassword: "",
+        newPassword: "",
+        confirmPassword: "",
+      });
+    }
+  }, [userProfile]);
 
   const hdlOnChange = (e) => {
     setForm({
@@ -36,7 +50,7 @@ const UserEditProfile = () => {
   const validateProfileForm = () => {
     const { username } = form;
     if (!username) {
-      toast.info('Please fill username for profile update');
+      toast.info('กรุณากรอกชื่อผู้ใช้สำหรับการอัปเดตโปรไฟล์');
       return false;
     }
     return true;
@@ -44,8 +58,13 @@ const UserEditProfile = () => {
 
   const validateEmailForm = () => {
     const { email } = form;
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!email) {
-      toast.info('Please fill email for profile update');
+      toast.info('กรุณากรอกอีเมลสำหรับการอัปเดต');
+      return false;
+    }
+    if (!emailRegex.test(email)) {
+      toast.info('กรุณากรอกอีเมลให้ถูกต้อง');
       return false;
     }
     return true;
@@ -54,11 +73,11 @@ const UserEditProfile = () => {
   const validatePasswordForm = () => {
     const { currentPassword, newPassword, confirmPassword } = form;
     if (!(currentPassword && newPassword && confirmPassword)) {
-      toast.info('Please fill all password fields');
+      toast.info('กรุณากรอกข้อมูลรหัสผ่านทั้งหมด');
       return false;
     }
     if (newPassword !== confirmPassword) {
-      toast.info('New password and confirm password should match');
+      toast.info('รหัสผ่านใหม่และการยืนยันรหัสผ่านต้องตรงกัน');
       return false;
     }
     return true;
@@ -68,25 +87,31 @@ const UserEditProfile = () => {
     e.preventDefault();
     if (!validateProfileForm()) return;
     try {
+      setLoading(true);
       await upDateUserProfile(token, { username: form.username });
-      toast.success('Username updated to ' + form.username);
+      toast.success('ชื่อผู้ใช้ถูกอัปเดตเป็น ' + form.username);
     } catch (err) {
       const errMsg = err.response?.data?.error || err.message;
       console.log(errMsg);
       toast.error(errMsg);
+    } finally {
+      setLoading(false);
     }
   };
- 
+
   const hdlSubmitEmail = async (e) => {
     e.preventDefault();
     if (!validateEmailForm()) return;
     try {
+      setLoading(true);
       await upDateUserProfile(token, { email: form.email });
-      toast.success('Email updated to ' + form.email);
+      toast.success('อีเมลถูกอัปเดตเป็น ' + form.email);
     } catch (err) {
       const errMsg = err.response?.data?.error || err.message;
       console.log(errMsg);
       toast.error(errMsg);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -94,15 +119,40 @@ const UserEditProfile = () => {
     e.preventDefault();
     if (!validatePasswordForm()) return;
     try {
+      setLoading(true);
       await upDateUserProfile(token, {
         currentPassword: form.currentPassword,
         newPassword: form.newPassword,
       });
-      toast.success('Password updated successfully');
+      toast.success('รหัสผ่านถูกอัปเดตเรียบร้อยแล้ว');
     } catch (err) {
       const errMsg = err.response?.data?.error || err.message;
       console.log(errMsg);
-      ToastContainer.error(errMsg);
+      toast.error(errMsg);
+    } finally {
+      setLoading(false);
+    }
+  };
+  
+  const hdlSubmit = async (e) => {
+    e.preventDefault();
+    document.getElementById('delete_profile').showModal();
+  };
+
+  const hdlConfirmDeleteProfile = async(e) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const result = await deleteUserProfile(token);
+      toast.success('โปรไฟล์ของคุณถูกลบเรียบร้อยแล้ว');
+      document.getElementById('delete_profile').close();
+      actionLogout()
+      navigate('/');
+    } catch(err) {
+      const errorMessage = err.response?.data?.message || 'มีข้อผิดพลาดในการลบโปรไฟล์ของคุณ';
+      toast.error(errorMessage);
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -121,7 +171,9 @@ const UserEditProfile = () => {
             type="text"
             className='border-2 rounded-lg p-2 mb-4'
           />
-          <button className='border-2 w-[25%] border-[#22A094] p-2 rounded-xl text-[#22A094] hover:bg-[#E2FAF8]'>ยืนยัน</button>
+          <button className='border-2 w-[25%] border-[#22A094] p-2 rounded-xl text-[#22A094] hover:bg-[#E2FAF8]' disabled={loading}>
+            {loading ? <span className="loading loading-dots loading-md"></span> : 'ยืนยัน'}
+          </button>
         </form>
 
         {/* อัปเดตอีเมล */}
@@ -134,7 +186,9 @@ const UserEditProfile = () => {
             type="text"
             className='border-2 rounded-lg p-2 mb-4'
           />
-          <button className='border-2 w-[25%] border-[#22A094] p-2 rounded-xl text-[#22A094] hover:bg-[#E2FAF8]'>ยืนยัน</button>
+          <button className='border-2 w-[25%] border-[#22A094] p-2 rounded-xl text-[#22A094] hover:bg-[#E2FAF8]' disabled={loading}>
+            {loading ? <span className="loading loading-dots loading-md"></span> : 'ยืนยัน'}
+          </button>
         </form>
 
         {/* เปลี่ยนรหัสผ่าน */}
@@ -166,7 +220,9 @@ const UserEditProfile = () => {
               type="password"
               className='border-2 rounded-lg p-2 mb-4'
             />
-            <button className='mt-8 border-2 w-[25%] border-[#22A094] p-2 rounded-xl text-[#22A094] hover:bg-[#E2FAF8]'>ยืนยัน</button>
+            <button className='mt-8 border-2 w-[25%] border-[#22A094] p-2 rounded-xl text-[#22A094] hover:bg-[#E2FAF8]' disabled={loading}>
+              {loading ? <span className="loading loading-dots loading-md"></span> : 'ยืนยัน'}
+            </button>
           </form>
         </div>
 
@@ -174,8 +230,31 @@ const UserEditProfile = () => {
         <div className='flex flex-col w-[75%] mt-10'>
           <span className='font-semibold text-xl'>ลบบัญชี</span>
           <span className='mb-2 text-sm text-[#6E6E6E] mt-3'>การดำเนินการนี้จะลบข้อมูลทั้งหมดของคุณและไม่สามารถยกเลิกได้</span>
-          <button className='mt-8 border-2 w-[25%] border-[#DB5252] p-2 rounded-xl bg-[#F6DBDB] text-[#DB5252] hover:bg-[#f6dbdbc2]'>ลบบัญชี</button>
+          <button 
+          onClick={hdlSubmit}
+          className='mt-8 border-2 w-[25%] border-[#DB5252] p-2 rounded-xl bg-[#F6DBDB] text-[#DB5252] hover:bg-[#f6dbdbc2]'>ลบบัญชี</button>
         </div>
+        <dialog id="delete_profile" className="modal">
+          <div className="modal-box flex flex-col">
+            <h3 className="font-semibold text-center text-xl">ยืนยันหรือไม่ว่าจะทำการลบบัญชีผู้ใช้ของคุณ</h3>
+            <h3 className="text-[#6E6E6E] text-center mt-5">การดำเนินการนี้จะลบข้อมูลทั้งหมดของคุณและไม่สามารถยกเลิกได้</h3>
+            <div className="modal-action flex justify-center">
+              <button
+                className={`border-2 text-[#22A094] border-[#22A094] p-2 rounded-lg w-[40%] hover:bg-[#E2FAF8] ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                onClick={hdlConfirmDeleteProfile}
+                disabled={loading}
+              >
+                {loading ? <span className="loading loading-dots loading-md"></span> : 'ยืนยัน'}
+              </button>
+              <button
+                className="border-2 text-[#DB5252] border-[#DB5252] p-2 rounded-lg hover:bg-[#F6DBDB]"
+                onClick={e => e.target.closest('dialog').close()}
+              >
+                ยกเลิก
+              </button>
+            </div>
+          </div>
+        </dialog>
       </div>
       <Footer />
     </div>

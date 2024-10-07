@@ -1,9 +1,12 @@
 import { useNavigate } from 'react-router-dom';
+import useAuthStore from '../store/auth-store';
 
 const Unauthorized = () => {
+  const actionLogout = useAuthStore((state) => state.actionLogout);
   const navigate = useNavigate();
 
   const handleOnClick = () => {
+    actionLogout()
     navigate('/'); 
   };
   return (

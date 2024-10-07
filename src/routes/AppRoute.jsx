@@ -15,14 +15,14 @@ import ManageVocap from '../pages/admin/ManageVocap';
 import UserFavorite from '../pages/user/UserFavorite';
 import UserProfile from '../pages/user/UserEditProfile';
 import MainVocab from '../pages/user/MainVocab';
-import Lesson from '../components/landingPage/Lesson';
-import Setting from '../pages/user/Setting';
 import ProtectRoute from './ProtectRoute';
 import UserLesson from '../pages/user/Userlesson';
 import UserEditProfile from '../pages/user/UserEditProfile';
-import LessonById from '../pages/user/LessonById';
+import LessonById from '../pages/lesson/LessonById';
 import ForgetPassword from '../pages/auth/ForgetPassword';
 import ResetPassword from '../pages/auth/ResetPassword';
+import LessonLayout from '../layout/LessonLayout';
+import Vocabulary from '../pages/user/Vocabulary';
 
 
 const guestRouter = createBrowserRouter([
@@ -58,10 +58,15 @@ const guestRouter = createBrowserRouter([
             { path: 'user-favorite', element: <UserFavorite/>},
             { path: 'user-edit-profile', element: <UserEditProfile/>},
             { path: 'category', element: <MainVocab/>},
-            { path: 'category/vocabulary', element: <MainVocab/>},
+            { path: 'category/:categoryId', element: <Vocabulary/>},
             { path: 'lesson', element: <UserLesson/>},
-            { path: 'lesson/:lessonId', element: <LessonById/>},
-   
+        ],
+    },
+    {
+        path : 'lesson/:lessonId',
+        element: <ProtectRoute element={< LessonLayout/>} allow={["USER","ADMIN"]}/>,
+        children: [
+            { index: true, element: <LessonById/>},
         ],
     },
 ]);

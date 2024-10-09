@@ -1,28 +1,36 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import useAuthStore from '../../store/auth-store';
-import { createSearch, deleteSearch, searchTerm } from '../../api/user';
 import { FaTrash } from "react-icons/fa6";
+import useUserStore from '../../store/user-store';
 
 const initialState = { searchTerm: '' };
 
 const TranslatorInput = () => {
   const user = useAuthStore((state) => state.user);
   const token = useAuthStore((state) => state.token);
+  const getSearTerm = useUserStore((state) => state.getSearTerm);
+  const createSearch = useUserStore((state) => state.createSearch);
+  const clearSearchHis = useUserStore((state) => state.clearSearchHis);
+  const deleteSearch = useUserStore((state) => state.deleteSearch);
+  const searchHis = useUserStore((state) => state.searchHis);
   const [inputValue, setInputValue] = useState(initialState);
-  const [searchHis, setSearchHis] = useState([]);
   const [showHistory, setShowHistory] = useState(false);
   const navigate = useNavigate();
 
-  useEffect(() => {
-    getSearchHis();
-  }, []);
 
+
+  useEffect(() => {
+    if (user === null) {
+      clearSearchHis(); 
+    } else {
+      getSearchHis();
+    }
+  }, [token]);
   const getSearchHis = async () => {
     try {
       if (user !== null) {
-        const res = await searchTerm(token);
-        setSearchHis(res.data.getUserSearch || []); 
+        await getSearTerm(token)
       }
     } catch (err) {
       console.log('Error in getting search history:', err);
@@ -39,22 +47,22 @@ const TranslatorInput = () => {
       return;
     }
     try {
-      const res = await createSearch(token, inputValue);
-      console.log('Search submitted successfully:', res);
-
       if (user) {
-        navigate(`/user/translate?text=${encodeURIComponent(inputValue.searchTerm)}&sourceLang=th&targetLang=es`);
-      } else {
-        navigate(`/translate?text=${encodeURIComponent(inputValue.searchTerm)}&sourceLang=th&targetLang=es`);
+        await createSearch(token, inputValue);
       }
-
+      
+      const url = user
+        ? `/user/translate?text=${encodeURIComponent(inputValue.searchTerm)}&sourceLang=th&targetLang=es`
+        : `/translate?text=${encodeURIComponent(inputValue.searchTerm)}&sourceLang=th&targetLang=es`;
+      
+      navigate(url);
+      
       setInputValue(initialState);
       setShowHistory(false);
     } catch (err) {
       console.log('error in hdlOnSubmit', err);
     }
   };
-
   const handleFocus = () => {
     setShowHistory(true);
   };
@@ -67,9 +75,7 @@ const TranslatorInput = () => {
 
   const hdlDelete = async(id) => {
     try {
-      const res = await deleteSearch(token, id);
-      console.log(res);
-      getSearchHis();
+      await deleteSearch(token, id);
     } catch (err) {
       console.log('error in hdlDelete', err);
     }

@@ -25,6 +25,7 @@ const useAuthStore = create(persist((set)=> ({
                 user: res.data.user,
                 token: res.data.token
             })
+            toast.success('Login success')
             return res.data.user.user.role
         }catch (err) {
             console.log('Error detail:', err)
@@ -35,9 +36,6 @@ const useAuthStore = create(persist((set)=> ({
         localStorage.clear()
         set({user: null, token: null })
     },
-    actionSearchTerm: () => {
-        
-    }
 }),{
     name:'auth-store',
     storage: createJSONStorage(()=> localStorage)

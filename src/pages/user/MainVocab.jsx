@@ -7,17 +7,17 @@ import Footer from '../../components/Footer';
 const MainVocab = () => {
   const token = useAuthStore((state) => state.token);
   const category = useUserStore((state) => state.category);
-  const getCategory = useUserStore((state) => state.getCategory);
+  const getVocabCategory = useUserStore((state) => state.getVocabCategory);
   const allVocabulary = useUserStore((state) => state.allVocabulary)
   const getAllVocab = useUserStore((state) => state.getAllVocab)
   const navigate = useNavigate();
 
   useEffect(() => {
     if (token) {
-      getCategory(token);
+      getVocabCategory(token);
       getAllVocab(token);
     }
-  }, [token, getCategory]);
+  }, [token, getVocabCategory]);
 
   const day = category.slice(0, 2);
   const animal = category.slice(2, 5);

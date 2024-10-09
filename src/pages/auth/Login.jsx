@@ -41,12 +41,11 @@ const Login = () => {
     if (error) {
       return setFormErrors(error)
     }
-
     const role = await actionLogin(form);
     if (role) {
       roleRedirect(role)
     }
-    toast.success('Login success')
+  
     setForm(initialState);
     setFormErrors({});
   };

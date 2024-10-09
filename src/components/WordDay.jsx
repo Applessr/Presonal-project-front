@@ -1,21 +1,43 @@
-import React, { useEffect, useState } from 'react'
-import { HiOutlineStar } from "react-icons/hi2";
-import { HiStar } from "react-icons/hi2";
+import React, { useEffect } from 'react';
+import { HiOutlineStar, HiStar } from "react-icons/hi2";
 import useUserStore from '../store/user-store';
 import useAuthStore from '../store/auth-store';
 
 const WordDay = () => {
-
+  const token = useAuthStore((state) => state.token);
+  const user = useAuthStore((state) => state.user);
   const wordOfTheDay = useUserStore((state) => state.wordOfTheDay);
   const getRandomWord = useUserStore((state) => state.getRandomWord);
+  const favorite = useUserStore((state) => state.favorite);
+  const getFavoriteVocab = useUserStore((state) => state.getFavoriteVocab);
+  const createFavoriteVocab = useUserStore((state) => state.createFavoriteVocab);
+  const deleteFavoriteVocab = useUserStore((state) => state.deleteFavoriteVocab);
 
   useEffect(() => {
+    getRandomWord();
+    if (token) {
 
-    getRandomWord()
-}, [getRandomWord]);
-  
+      getFavoriteVocab(token);
+    }
+  }, [getRandomWord, getFavoriteVocab, token, user]);
 
+  const isFavorite = (vocabId) => {
+    if (user) {
+      return favorite.some((item) => item.vocabularyId === vocabId);
+    }
+  };
 
+  const handleFavoriteToggle = async () => {
+    if (!wordOfTheDay) return;
+
+    const vocabId = wordOfTheDay.id;
+    if (isFavorite(vocabId)) {
+      await deleteFavoriteVocab(token, vocabId);
+    } else {
+      await createFavoriteVocab(token, vocabId);
+    }
+    await getFavoriteVocab(token);
+  };
 
   return (
     <div className='flex justify-center mt-20'>
@@ -31,14 +53,21 @@ const WordDay = () => {
         <h1 className='text-2xl font-bold mt-4 text-[#22A094]'>{wordOfTheDay ? wordOfTheDay.wordEs : '...'}</h1>
         <h1 className='text-xl font-light text-[#6e6e6ec7] mb-4'>{wordOfTheDay ? wordOfTheDay.wordTh : '...'}</h1>
         <h1 className='flex text-xl font-light text-[#6e6e6ec7] mb-4'>
-          <span className='w-6 h-6 flex items-center justify-center'>
-            <HiOutlineStar className='w-7 h-7 text-[#6E6E6E]' />
-          </span>
+          <div
+            className='hover:scale-110 hover:cursor-pointer'
+            onClick={handleFavoriteToggle}
+          >
+            {wordOfTheDay && isFavorite(wordOfTheDay.id) ? (
+              <HiStar className='w-7 h-7 text-[#f3de6b]' />
+            ) : (
+              <HiOutlineStar className='w-7 h-7 text-[#6E6E6E]' />
+            )}
+          </div>
           บันทึกไปยังรายการโปรด
         </h1>
       </div>
     </div>
-  )
+  );
 }
 
-export default WordDay
+export default WordDay;

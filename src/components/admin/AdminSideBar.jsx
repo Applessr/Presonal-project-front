@@ -23,12 +23,12 @@ const AdminSideBar = () => {
   const firstLetter = user.user?.username ? user.user.username.charAt(0).toUpperCase() : '?';
 
   return (
-    <div className='w-[20%] h-screen bg-white text-[#22A094] flex flex-col'>
+    <div className='w-[20%] h-auto bg-white text-[#22A094] flex flex-col'>
       <div className='flex flex-col items-center'>
         <div className="flex items-center text-xl justify-center w-16 h-16 bg-[#22A094] text-white rounded-full">
           {firstLetter}
         </div>
-      <h1 className='text-center text-2xl font-bold mt-1 mb-3'>Admin</h1>
+      <h1 className='text-center text-2xl font-semibold mt-1 mb-3'>Admin, { user.user.username}</h1>
       </div>
         <div className='flex flex-col h-[91vh]'>
             <div className='flex-grow'>

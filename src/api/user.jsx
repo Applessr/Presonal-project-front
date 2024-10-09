@@ -29,22 +29,32 @@ export const lesson = (token) => {
         }
     });
 }
+export const getLessonById = (token,id) => {
+    return axios.get('http://localhost:5000/user/lessons/'+id, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+};
 export const category = (token) => {
-    return axios.get('http://localhost:5000/user/vocabulary', {
+    return axios.get('http://localhost:5000/user/lessons/'+id, {
         headers: {
             Authorization: `Bearer ${token}`
         }
     });
 }
-export const allVocab = (token) => {
-    return axios.get('http://localhost:5000/user/allVocabulary', {
+export const allVocab = () => {
+    return axios.get('http://localhost:5000/user/allVocabulary');
+}
+export const allVocabCategory = (token) => {
+    return axios.get('http://localhost:5000/user/vocabulary/', {
         headers: {
             Authorization: `Bearer ${token}`
         }
     });
 }
 export const vocabulary = (token, categoryId) => {
-    return axios.get('http://localhost:5000/user/vocabulary/'+ categoryId, {
+    return axios.get('http://localhost:5000/user/vocabulary/'+categoryId, {
         headers: {
             Authorization: `Bearer ${token}`
         }
@@ -63,7 +73,7 @@ export const createSearch = (token,SearchInput) => {
             Authorization: `Bearer ${token}`
         }
     });
-}
+};
 export const deleteSearch = (token, id) => {
     return axios.delete('http://localhost:5000/user/user-history/'+id,{
         headers: {
@@ -71,3 +81,26 @@ export const deleteSearch = (token, id) => {
         }
     });
 };
+export const getFavorite = (token) => {
+    return axios.get('http://localhost:5000/user/user-favorite', {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+};
+export const createFavorite = (token, vocabId) => {
+    return axios.post('http://localhost:5000/user/user-favorite/'+vocabId, {}, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+};
+
+export const deleteFavorite = (token, vocabId) => {
+    return axios.delete('http://localhost:5000/user/user-favorite/'+vocabId, {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+};
+

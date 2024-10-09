@@ -13,7 +13,6 @@ import Dashboard from '../pages/admin/Dashboard';
 import ManageUser from '../pages/admin/ManageUser';
 import ManageVocap from '../pages/admin/ManageVocap';
 import UserFavorite from '../pages/user/UserFavorite';
-import UserProfile from '../pages/user/UserEditProfile';
 import MainVocab from '../pages/user/MainVocab';
 import ProtectRoute from './ProtectRoute';
 import UserLesson from '../pages/user/Userlesson';
@@ -23,6 +22,8 @@ import ForgetPassword from '../pages/auth/ForgetPassword';
 import ResetPassword from '../pages/auth/ResetPassword';
 import LessonLayout from '../layout/LessonLayout';
 import Vocabulary from '../pages/user/Vocabulary';
+import FirstPage from '../pages/lesson/FirstPage';
+import Summary from '../pages/lesson/Summary';
 
 
 const guestRouter = createBrowserRouter([
@@ -66,7 +67,9 @@ const guestRouter = createBrowserRouter([
         path : 'lesson/:lessonId',
         element: <ProtectRoute element={< LessonLayout/>} allow={["USER","ADMIN"]}/>,
         children: [
-            { index: true, element: <LessonById/>},
+            { index: true, element: <FirstPage/>},
+            { path: ':questionId', element: <LessonById/>},
+            { path: ':summary', element: <Summary/>},
         ],
     },
 ]);

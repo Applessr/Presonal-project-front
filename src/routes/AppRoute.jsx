@@ -23,7 +23,6 @@ import ResetPassword from '../pages/auth/ResetPassword';
 import LessonLayout from '../layout/LessonLayout';
 import Vocabulary from '../pages/user/Vocabulary';
 import FirstPage from '../pages/lesson/FirstPage';
-import Summary from '../pages/lesson/Summary';
 
 
 const guestRouter = createBrowserRouter([
@@ -69,7 +68,6 @@ const guestRouter = createBrowserRouter([
         children: [
             { index: true, element: <FirstPage/>},
             { path: ':questionId', element: <LessonById/>},
-            { path: ':summary', element: <Summary/>},
         ],
     },
 ]);

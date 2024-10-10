@@ -19,4 +19,4 @@ export const currentUser = (token) => {
             Authorization: `Bearer ${token}`
         }
     });
-}
+};

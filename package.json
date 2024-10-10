@@ -10,7 +10,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@lottiefiles/dotlottie-react": "^0.9.1",
     "add": "^2.0.6",
     "axios": "^1.7.7",
     "joi": "^17.13.3",

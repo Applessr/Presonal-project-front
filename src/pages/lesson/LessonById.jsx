@@ -24,38 +24,60 @@ const LessonById = () => {
   const [score, setScore] = useState(0);
   const [isFinished, setIsFinished] = useState(false);
   const [buttonState, setButtonState] = useState({});
+  const [isAnswered, setIsAnswered] = useState(false);
 
   useEffect(() => {
     if (token && lessonId) {
       (async () => {
-        await getOneScore(token,lessonId)
+        await getOneScore(token, lessonId);
         await getAllUser(token, lessonId);
         await getLessonId(token, lessonId);
       })();
     }
   }, [token, lessonId, getLessonId]);
 
-  setTimeout(async () => {
-    if (currentQuestionIndex < questions.length - 1) {
-      setCurrentQuestionIndex((prevIndex) => prevIndex + 1);
-      setButtonState({});
-    } else {
-      setIsFinished(true);
-  
-      const newScore = score + 1; 
-  
-      if (thisLessonScore.length === 0 || newScore > thisLessonScore[0].score) { 
-        if (thisLessonScore.length === 0) {
-          await createUserScore(token, lessonId, { score: newScore });
-        } else {
-          await redoUserScore(token, lessonId, { score: newScore });
-        }
-        getAllUser(token, lessonId);  
-      }
-    }
-  }, 3000);
-
   const currentQuestion = questions[currentQuestionIndex];
+
+  const handleAnswer = (option) => {
+    if (isAnswered) return;
+
+    const correctOption = currentQuestion.correctOption;
+
+    let newScore = score;
+
+    if (option === correctOption) {
+      newScore = score + 1;
+      setScore(newScore);
+      setButtonState({ [option]: 'correct' });
+    } else {
+      setButtonState({ [option]: 'incorrect' });
+    }
+
+    setIsAnswered(true);
+
+    setTimeout(() => {
+      if (currentQuestionIndex < questions.length - 1) {
+        setCurrentQuestionIndex(currentQuestionIndex + 1);
+        setButtonState({});
+        setIsAnswered(false);
+      } else {
+        setIsFinished(true);
+        hdlScoreSubmit(newScore);
+      }
+    }, 3000);
+  };
+
+  const hdlScoreSubmit = async (finalScore) => {
+    if (thisLessonScore.length === 0 || finalScore > thisLessonScore[0].score) {
+      if (thisLessonScore.length === 0) {
+        await createUserScore(token, lessonId, { score: finalScore });
+      } else {
+        await redoUserScore(token, lessonId, { score: finalScore });
+      }
+      getAllUser(token, lessonId);
+    }
+  };
+
 
   return (
     <div>
@@ -64,27 +86,55 @@ const LessonById = () => {
           <h2 className='text-3xl flex items-center'>ยินดีด้วย<img className='w-16 h-16' src={pop} alt="Congratulations" /></h2>
           <p className='text-xl mb-4'>คะแนนของคุณคือ {score} คะแนนจาก {questions.length}</p>
           <div className="overflow-x-auto w-[30rem] bg-secondary text-primary rounded-lg mb-10">
-            <table className="table flex-1">
-              {/* head */}
+            <table className="table text-lg flex-1">
               <thead>
-                <tr className=''>
-                  <th>Rank</th>
-                  <th>Name</th>
-                  <th>Score</th>
+                <tr>
+                  <th className='text-center text-xl font-semibold'>Rank</th>
+                  <th className='text-center text-xl font-semibold'>Name</th>
+                  <th className='text-center text-xl font-semibold'>Score</th>
                 </tr>
               </thead>
               <tbody className='bg-white'>
-                {allScore.map((item,index) => (
-                  <tr key={item.id} className="text-black">
-                    <th>{index + 1}</th>
-                    <td>{item.user.username}</td>
-                    <td>{item.score}</td>
+                {allScore[0] && allScore[0].user && (
+                  <tr key={allScore[0].id} className="text-black text-center">
+                    <th><img className='w-12 h-12' src="https://i.imgur.com/jpFXWtu.png" alt="gold-medal" /></th>
+                    <td className='text-xl text-primary'>"{allScore[0].user.username}"</td>
+                    <td>{allScore[0].score}</td>
                   </tr>
-                ))}
+                )}
+                {allScore[1] && allScore[1].user && (
+                  <tr key={allScore[1].id} className="text-black text-center">
+                    <th><img className='w-11 h-11' src="https://i.imgur.com/4DOKN4o.png" alt="gold-medal" /></th>
+                    <td className='text-xl'>{allScore[1].user.username}</td>
+                    <td>{allScore[1].score}</td>
+                  </tr>
+                )}
+                {allScore[2] && allScore[2].user && (
+                  <tr key={allScore[2].id} className="text-black text-center">
+                    <th><img className='w-9 h-9' src="https://i.imgur.com/RqG6jhE.png" alt="gold-medal" /></th>
+                    <td>{allScore[2].user.username}</td>
+                    <td>{allScore[2].score}</td>
+                  </tr>
+                )}
+                {allScore[3] && allScore[3].user && (
+                  <tr key={allScore[3].id} className="text-black">
+                    <th>4</th>
+                    <td>{allScore[3].user.username}</td>
+                    <td>{allScore[3].score}</td>
+                  </tr>
+                )}
+                {allScore[4] && allScore[4].user && (
+                  <tr key={allScore[4].id} className="text-black">
+                    <th>5</th>
+                    <td>{allScore[4].user.username}</td>
+                    <td>{allScore[4].score}</td>
+                  </tr>
+                )}
               </tbody>
             </table>
           </div>
           
+
           <button
             className='p-2 border-2 border-primary text-primary text-xl rounded-lg'
             onClick={() => navigate('/user/lesson')}
@@ -95,9 +145,7 @@ const LessonById = () => {
       ) : currentQuestion ? (
         <div>
           <div className='flex flex-col items-center justify-center'>
-            <span className='text-sm mb-4'>
-              ข้อที่ {currentQuestionIndex + 1} จาก {questions.length}
-            </span>
+            <span className='text-sm mb-4'>ข้อที่ {currentQuestionIndex + 1} จาก {questions.length}</span>
             <span className='text-3xl'>{currentQuestion.question}</span>
             <img className='w-[325px] h-[325px] mt-10 mb-10' src={currentQuestion.image} alt="Question" />
           </div>
@@ -107,6 +155,7 @@ const LessonById = () => {
                 key={option}
                 className={`p-2 border-2 border-[#6E6E6E] text-xl flex gap-2 rounded-lg ${buttonState[option] === 'correct' ? 'bg-[#E2FAF8] text-[#22A094] border-[#22A094]' : buttonState[option] === 'incorrect' ? 'bg-[#E8A1A1] text-[#DB5252] border-[#DB5252]' : 'text-[#6E6E6E]'}`}
                 onClick={() => handleAnswer(option)}
+                disabled={isAnswered}
               >
                 {buttonState[option] === 'correct' ? <FaCheck className='w-6 h-6 text-[#22A094]' /> : buttonState[option] === 'incorrect' ? <RxCross2 className='w-6 h-6 text-[#DB5252]' /> : null}
                 {currentQuestion[option]}
@@ -117,6 +166,7 @@ const LessonById = () => {
       ) : (
         <span>Loading...</span>
       )}
+      
     </div>
   );
 };

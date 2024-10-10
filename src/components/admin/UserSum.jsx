@@ -20,12 +20,12 @@ const UserSum = () => {
                 <div className="stat-desc">21% more than last month</div>
             </div>
 
-            <div className="stat place-items-center">
+            {userInfo.userList && <div className="stat place-items-center">
                 <div className="stat-title">Users</div>
                 <div className="stat-value text-primary">{userInfo.userList.length}</div>
                 <div className="stat-desc text-primary">↗︎ 40 (2%)</div>
             </div>
-
+}
         </div>
     )
 }

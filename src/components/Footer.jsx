@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="footer bg-secondary text-primary py-10 px-40">
+    <footer className="footer bg-secondary text-primary py-10 mt-10 px-40">
       <aside>
         <img className='h-28' src="https://i.imgur.com/1rQcR3n.png" alt="" />
         <p className="text-left">

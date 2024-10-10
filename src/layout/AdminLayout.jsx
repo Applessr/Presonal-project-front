@@ -7,7 +7,7 @@ const AdminLayout = () => {
   return (
     <div className='h-screen flex flex-col overflow-hidden'> 
         <div>
-            <AdminHeader />
+            <AdminHeader  />
         </div>
         <div className='flex flex-grow overflow-hidden'> 
             <AdminSideBar />

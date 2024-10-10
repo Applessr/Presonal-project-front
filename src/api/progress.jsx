@@ -6,7 +6,8 @@ export const userProgress = (token) => {
             Authorization: `Bearer ${token}`
         }
     });
-}
+};
+
 export const getAllUserScore = (token, lessonId) => {
     return axios.get('http://localhost:5000/user/user-progress/' + lessonId, {
         headers: {
@@ -14,6 +15,7 @@ export const getAllUserScore = (token, lessonId) => {
         }
     });
 };
+
 export const getOneScore = (token, lessonId) => {
     return axios.get('http://localhost:5000/user/user-progress/personal/' + lessonId, {
         headers: {
@@ -29,6 +31,7 @@ export const createScore = (token, lessonId, score) => {
         }
     });
 };
+
 export const redoScore = (token, lessonId, score) => {
     return axios.patch('http://localhost:5000/user/user-progress/' + lessonId, score, {
         headers: {

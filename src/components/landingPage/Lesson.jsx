@@ -50,7 +50,7 @@ const Lesson = () => {
                     return (
                         <div
                             onClick={() => hdlLessonClick(item.id)} key={item.id}
-                            className='hover:cursor-pointer shadow-md bg-[#E2FAF8] hover:bg-[#cbf5f1] w-[18rem] h-[27rem] flex flex-col items-center rounded-lg'
+                            className=' hover:cursor-pointer shadow-md bg-[#E2FAF8] hover:bg-[#cbf5f1] w-[18rem] h-[27rem] flex flex-col items-center rounded-lg'
                         >
                             <div className='w-[15rem] h-[15rem] overflow-hidden mt-8 rounded-lg bg-slate-200'>
                                 <img

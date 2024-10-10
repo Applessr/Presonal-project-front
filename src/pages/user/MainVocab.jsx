@@ -17,7 +17,8 @@ const MainVocab = () => {
       getVocabCategory(token);
       getAllVocab(token);
     }
-  }, [token, getVocabCategory]);
+  }, [token, getVocabCategory, getAllVocab]);
+
 
   const day = category.slice(0, 2);
   const animal = category.slice(2, 5);

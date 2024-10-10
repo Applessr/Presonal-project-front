@@ -5,16 +5,18 @@ import { Outlet } from 'react-router-dom'
 
 const AdminLayout = () => {
   return (
-    <div>
+    <div className='h-screen flex flex-col overflow-hidden'> 
         <div>
-            <AdminHeader/>
+            <AdminHeader />
         </div>
-        <div className='flex'>
-            <AdminSideBar/>
-            <Outlet />
+        <div className='flex flex-grow overflow-hidden'> 
+            <AdminSideBar />
+            <div className='flex-grow flex justify-center items-center overflow-hidden'> 
+                <Outlet />
+            </div>
         </div>
     </div>
   )
 }
 
-export default AdminLayout
+export default AdminLayout;

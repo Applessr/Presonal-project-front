@@ -39,7 +39,7 @@ const UserFavorite = () => {
 
   return (
     <div className='pt-20 min-h-screen'>
-      <div className='mx-36 min-h-[61vh]'>
+      <div className='mx-36 min-h-[66vh]'>
         <h1 className='text-2xl text-[#22A094]'>รายการโปรด</h1>
         <ul>
           {favorite.map(item => (

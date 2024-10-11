@@ -40,9 +40,9 @@ const WordDay = () => {
   };
 
   return (
-    <div className='flex justify-center mt-20'>
-      <div className='bg-[#E2FAF8] w-[45%] p-4 flex flex-col items-center rounded-xl'>
-        <h1 className='text-xl font-light text-[#6e6e6ec7] mb-4'>คำน่ารู้</h1>
+    <div className='flex justify-center mt-20 '>
+      <div className='bg-[#E2FAF8] dark:bg-[#6E6E6E] text-[#6e6e6ec7] w-[45%] p-4 flex flex-col items-center rounded-xl dark:text-[#e7f4ef] '>
+        <h1 className='text-xl font-light mb-4'>คำน่ารู้</h1>
         <div className='w-24 h-24 rounded-md overflow-hidden bg-slate-300'>
           <img
             className='w-full h-full object-cover'
@@ -50,9 +50,9 @@ const WordDay = () => {
             alt='คำน่ารู้'
           />
         </div>
-        <h1 className='text-2xl font-bold mt-4 text-[#22A094]'>{wordOfTheDay ? wordOfTheDay.wordEs : '...'}</h1>
-        <h1 className='text-xl font-light text-[#6e6e6ec7] mb-4'>{wordOfTheDay ? wordOfTheDay.wordTh : '...'}</h1>
-        <h1 className='flex text-xl font-light text-[#6e6e6ec7] mb-4'>
+        <h1 className='text-2xl font-bold mt-4 text-[#22A094] dark:text-[#45bcb0]'>{wordOfTheDay ? wordOfTheDay.wordEs : '...'}</h1>
+        <h1 className='text-xl font-light mb-4'>{wordOfTheDay ? wordOfTheDay.wordTh : '...'}</h1>
+        <h1 className='flex text-xl font-light mb-4'>
           <div
             className='hover:scale-110 hover:cursor-pointer'
             onClick={handleFavoriteToggle}
@@ -60,7 +60,7 @@ const WordDay = () => {
             {wordOfTheDay && isFavorite(wordOfTheDay.id) ? (
               <HiStar className='w-7 h-7 text-[#f3de6b]' />
             ) : (
-              <HiOutlineStar className='w-7 h-7 text-[#6E6E6E]' />
+              <HiOutlineStar className='w-7 h-7' />
             )}
           </div>
           บันทึกไปยังรายการโปรด

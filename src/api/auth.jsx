@@ -7,6 +7,9 @@ export const register = (form) =>
 export const login = (form) => 
     axios.post('http://localhost:5000/auth/login',form);
 
+export const loginGoogle = (token) => 
+    axios.post('http://localhost:5000/auth/login/google', { token });
+
 export const forget = (body) => 
     axios.post('http://localhost:5000/auth/forget-password',body);
 

@@ -159,7 +159,7 @@ const UserEditProfile = () => {
   return (
     <div>
       <div className='flex flex-col items-center p-28 w-[50%] mx-auto'>
-        <h1 className='text-2xl text-[#22A094]'>ตั้งค่า</h1>
+        <h1 className='text-2xl text-[#22A094] dark:text-[#45bcb0]'>ตั้งค่า</h1>
         
         {/* อัปเดตชื่อผู้ใช้ */}
         <form className='flex flex-col w-[75%] mb-14' onSubmit={hdlSubmitProfile}>
@@ -169,9 +169,9 @@ const UserEditProfile = () => {
             value={form.username}
             name='username'
             type="text"
-            className='border-2 rounded-lg p-2 mb-4'
+            className='border-2 rounded-lg p-2 mb-4 text-black'
           />
-          <button className='border-2 w-[25%] border-[#22A094] p-2 rounded-xl text-[#22A094] hover:bg-[#E2FAF8]' disabled={loading}>
+          <button className='border-2 w-[25%] border-[#22A094] p-2 rounded-xl text-[#22A094] hover:bg-[#E2FAF8] dark:border-[#e7f4ef]  dark:hover:bg-[#e7f4ef49] dark:text-[#e7f4ef]' disabled={loading}>
             {loading ? <span className="loading loading-dots loading-md"></span> : 'ยืนยัน'}
           </button>
         </form>
@@ -184,9 +184,9 @@ const UserEditProfile = () => {
             value={form.email}
             name='email'
             type="text"
-            className='border-2 rounded-lg p-2 mb-4'
+            className='border-2 rounded-lg p-2 mb-4 text-black'
           />
-          <button className='border-2 w-[25%] border-[#22A094] p-2 rounded-xl text-[#22A094] hover:bg-[#E2FAF8]' disabled={loading}>
+          <button className='border-2 w-[25%] border-[#22A094] p-2 rounded-xl text-[#22A094] hover:bg-[#E2FAF8] dark:border-[#e7f4ef]  dark:hover:bg-[#e7f4ef49] dark:text-[#e7f4ef]' disabled={loading}>
             {loading ? <span className="loading loading-dots loading-md"></span> : 'ยืนยัน'}
           </button>
         </form>
@@ -194,7 +194,7 @@ const UserEditProfile = () => {
         {/* เปลี่ยนรหัสผ่าน */}
         <div className='flex flex-col w-[75%]'>
           <span className='font-semibold text-xl'>เปลี่ยนรหัสผ่าน</span>
-          <span className='text-[#22A094] mt-4'><Link to='/forget-password'>ลืมรหัสผ่านใช่หรือไม่</Link></span>
+          <span className='text-[#22A094] mt-4 dark:text-[#45bcb0]'><Link to='/forget-password'>ลืมรหัสผ่านใช่หรือไม่</Link></span>
           <form className='flex flex-col mt-8' onSubmit={hdlSubmitPassword}>
             <span className='mb-2 text-lg text-[#6E6E6E]'>รหัสผ่านปัจจุบัน</span>
             <input
@@ -202,7 +202,7 @@ const UserEditProfile = () => {
               value={form.currentPassword}
               name='currentPassword'
               type="password"
-              className='border-2 rounded-lg p-2 mb-4'
+              className='border-2 rounded-lg p-2 mb-4 text-black'
             />
             <span className='mb-2 text-lg text-[#6E6E6E]'>รหัสผ่านใหม่</span>
             <input
@@ -210,7 +210,7 @@ const UserEditProfile = () => {
               value={form.newPassword}
               name='newPassword'
               type="password"
-              className='border-2 rounded-lg p-2 mb-4'
+              className='border-2 rounded-lg p-2 mb-4 text-black'
             />
             <span className='mb-2 text-lg text-[#6E6E6E]'>ยืนยันรหัสผ่าน</span>
             <input
@@ -218,9 +218,9 @@ const UserEditProfile = () => {
               value={form.confirmPassword}
               name='confirmPassword'
               type="password"
-              className='border-2 rounded-lg p-2 mb-4'
+              className='border-2 rounded-lg p-2 mb-4 text-black'
             />
-            <button className='mt-8 border-2 w-[25%] border-[#22A094] p-2 rounded-xl text-[#22A094] hover:bg-[#E2FAF8]' disabled={loading}>
+            <button className='mt-8 border-2 w-[25%] border-[#22A094] p-2 rounded-xl text-[#22A094] hover:bg-[#E2FAF8] dark:border-[#e7f4ef]  dark:hover:bg-[#e7f4ef49] dark:text-[#e7f4ef]' disabled={loading}>
               {loading ? <span className="loading loading-dots loading-md"></span> : 'ยืนยัน'}
             </button>
           </form>
@@ -235,19 +235,19 @@ const UserEditProfile = () => {
           className='mt-8 border-2 w-[25%] border-[#DB5252] p-2 rounded-xl bg-[#F6DBDB] text-[#DB5252] hover:bg-[#f6dbdbc2]'>ลบบัญชี</button>
         </div>
         <dialog id="delete_profile" className="modal">
-          <div className="modal-box flex flex-col">
+          <div className="modal-box flex flex-col dark:bg-[#6E6E6E]">
             <h3 className="font-semibold text-center text-xl">ยืนยันหรือไม่ว่าจะทำการลบบัญชีผู้ใช้ของคุณ</h3>
-            <h3 className="text-[#6E6E6E] text-center mt-5">การดำเนินการนี้จะลบข้อมูลทั้งหมดของคุณและไม่สามารถยกเลิกได้</h3>
+            <h3 className="text-[#6E6E6E] dark:text-[#c5c4c4] text-center mt-5">การดำเนินการนี้จะลบข้อมูลทั้งหมดของคุณและไม่สามารถยกเลิกได้</h3>
             <div className="modal-action flex justify-center">
               <button
-                className={`border-2 text-[#22A094] border-[#22A094] p-2 rounded-lg w-[40%] hover:bg-[#E2FAF8] ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
+                className={`border-2 text-[#22A094] border-[#22A094] p-2 rounded-lg w-[40%] hover:bg-[#E2FAF8] dark:border-[#e7f4ef] dark:hover:bg-[#e7f4ef49] dark:text-[#e7f4ef] ${loading ? 'opacity-50 cursor-not-allowed' : ''}`}
                 onClick={hdlConfirmDeleteProfile}
                 disabled={loading}
               >
                 {loading ? <span className="loading loading-dots loading-md"></span> : 'ยืนยัน'}
               </button>
               <button
-                className="border-2 text-[#DB5252] border-[#DB5252] p-2 rounded-lg hover:bg-[#F6DBDB]"
+                className="border-2 text-[#e65f5f] border-[#e65f5f] bg-[#F6DBDB] hover:bg-[#f6dbdbc2] p-2 rounded-lg hover:bg-[#F6DBDB]"
                 onClick={e => e.target.closest('dialog').close()}
               >
                 ยกเลิก

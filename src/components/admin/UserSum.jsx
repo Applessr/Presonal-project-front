@@ -13,7 +13,7 @@ const UserSum = () => {
     }, [])
 
     return (
-        <div className="ml-10 stats shadow text-center">
+        <div className="ml-10 stats shadow text-center  dark:text-[#2C2C2A]">
             <div className="stat place-items-center">
                 <div className="stat-title">Total Page Views</div>
                 <div className="stat-value">89,400</div>

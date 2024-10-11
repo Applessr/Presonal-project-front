@@ -50,8 +50,8 @@ const VocabTable = () => {
 
     return (
         <div className='flex flex-col items-center'>
-            <div className='flex gap-3'>
-                <h1>เลือกหมวดหมูคำศัพท์ : </h1>
+            <div className='flex gap-3 text-[#2C2C2A]'>
+                <h1 className='dark:text-[#E7F4EF]'>เลือกหมวดหมูคำศัพท์ : </h1>
                 <select
                     value={selectedCategory}
                     onChange={hdlCategory}
@@ -74,7 +74,7 @@ const VocabTable = () => {
                     <option value={16}>ครอบครัว</option>
                 </select>
             </div>
-            <div className="overflow-x-auto w-full h-[42rem]">
+            <div className="overflow-x-auto w-full h-[32rem]">
                 <table className="text-sm text-left rtl:text-right text-gray-500 rounded-lg">
                     <thead className="text-xs text-gray-700 uppercase bg-gray-50">
                         <tr>

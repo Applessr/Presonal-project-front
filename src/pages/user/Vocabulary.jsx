@@ -51,7 +51,7 @@ const Vocabulary = () => {
                         <div><img src={vocabulary.image} alt="vocabulary" /></div>
                     </div>
                     <div className='flex flex-col'>
-                        <span className='text-2xl font-semibold text-[#22A094]'>{vocabulary.name}</span>
+                        <span className='text-2xl font-semibold text-[#22A094] dark:text-[#e7f4ef]'>{vocabulary.name}</span>
                         <span className='text-xl text-[#307CA6]'>{vocabulary.nameES}</span>
                         <span className='text-[#6E6E6E]'>{onlyVocab.length} คำศัพท์</span>
                     </div>

@@ -35,12 +35,12 @@ const Translator = () => {
     
     <div className="w-full min-h-screen text-center text-[#22A094]">
       <div className='flex justify-center'>
-        <div className='w-[50%] bg-[#E2FAF8] rounded-lg mt-24'>
+        <div className='w-[50%] bg-[#E2FAF8] dark:bg-[#6E6E6E] dark:text-[#e7f4ef] rounded-lg mt-24'>
           <div className='flex gap-4 m-4'>
             <label htmlFor="sourceLang" className="text-2xl mb-2">ภาษาต้นทาง:</label>
             <select
               id="sourceLang"
-              className="p-2 rounded-md border border-gray-300"
+              className="p-2 rounded-md border border-gray-300 text-black"
               value={sourceLang}
               onChange={(e) => setSourceLang(e.target.value)}
             >
@@ -51,7 +51,7 @@ const Translator = () => {
           <textarea
             id="inputText"
             placeholder="กรอกข้อความที่นี่"
-            className="w-[95%] h-40 text-2xl p-4 text-black bg-[#E2FAF8] rounded-md border-none"
+            className="w-[95%] h-40 text-2xl p-4 text-black dark:text-[#e7efeb] bg-[#E2FAF8] dark:bg-[#6E6E6E] rounded-md border-none"
             value={inputText}
             onChange={(e) => setInputText(e.target.value)}
           ></textarea>
@@ -62,12 +62,12 @@ const Translator = () => {
       </div>
 
       <div className='flex justify-center mt-10'>
-        <div className='w-[50%] bg-[#E2FAF8] rounded-lg'>
+        <div className='w-[50%] bg-[#E2FAF8] dark:bg-[#6E6E6E] dark:text-[#e7f4ef] rounded-lg'>
           <div className='flex gap-4 m-4'>
             <label htmlFor="targetLang" className="text-2xl mb-2">ภาษาปลายทาง:</label>
             <select
               id="targetLang"
-              className="p-2 rounded-md border border-gray-300"
+              className="p-2 rounded-md border text-black border-gray-300"
               value={targetLang}
               onChange={(e) => setTargetLang(e.target.value)}
             >
@@ -77,7 +77,7 @@ const Translator = () => {
           </div>
           <textarea
             id="translatedText"
-            className="w-[95%] h-40 text-2xl p-4 text-black bg-[#E2FAF8] rounded-md border-none"
+            className="w-[95%] h-40 text-2xl p-4 text-black dark:text-[#e7efeb] bg-[#E2FAF8] dark:bg-[#6E6E6E] rounded-md border-none"
             value={translatedText}  
             readOnly
           ></textarea>

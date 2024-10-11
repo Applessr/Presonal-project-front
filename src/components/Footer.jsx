@@ -1,11 +1,16 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
+import useAuthStore from '../store/auth-store';
 
 const Footer = () => {
+  const isDark = useAuthStore((state) => state.isDark);
   return (
-    <footer className="footer bg-secondary text-primary py-10 mt-10 px-40">
+
+    <footer className="footer bg-secondary text-primary py-10 mt-10 px-40 dark:bg-[#6E6E6E] dark:text-[#e7f4ef]">
       <aside>
-        <img className='h-28' src="https://i.imgur.com/1rQcR3n.png" alt="" />
+        {isDark
+          ? <img className='h-28' src="https://i.imgur.com/J3pmCQT.png" alt="" />
+          : <img className='h-28' src="https://i.imgur.com/1rQcR3n.png" alt="" />}
         <p className="text-left">
           Spanify Translation Services
           <br />

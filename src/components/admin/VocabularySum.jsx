@@ -13,11 +13,12 @@ const VocabularySum = () => {
     const allVocabulary = useUserStore((state) => state.allVocabulary);
 
     useEffect(()=> {
+        
         getAllVocab(token)
         getVocabCategory(token)
     },[token])
     return (
-        <div className="stats stats-vertical ml-4 shadow text-center">
+        <div className="stats stats-vertical ml-4 shadow text-center dark:text-[#2C2C2A]">
             
             <div className="stat">
                 <div className="stat-title">Vocabulary Category</div>

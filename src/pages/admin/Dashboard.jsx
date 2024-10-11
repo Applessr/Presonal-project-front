@@ -9,7 +9,7 @@ const Dashboard = () => {
       <div
         className='h-full w-full'
         style={{ backgroundImage: "url('https://i.imgur.com/lY6Fwlc.png')" }}>
-        <h1 className='text-2xl my-6 pt-12 text-center'>Dash board</h1>
+        <h1 className='text-2xl my-6 pt-16 text-center dark:text-[#2C2C2A]'>Dash board</h1>
         <div className='flex justify-evenly'>
           <div className=''>
             <div className='m-12'>

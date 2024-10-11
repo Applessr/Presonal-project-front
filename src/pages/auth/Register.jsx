@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer';
 import useAuthStore from '../../store/auth-store';
 import validateRegister from '../../utils/validator';
@@ -11,6 +11,7 @@ const initialState = {
 };
 
 const Register = () => {
+  const isDark = useAuthStore((state) => state.isDark);
   const actionRegister = useAuthStore((state) => state.actionRegister);
   const navigate = useNavigate();
 
@@ -34,7 +35,7 @@ const Register = () => {
 
     try {
       await actionRegister(form);
-      navigate('/'); 
+      navigate('/');
     } catch (error) {
       if (error.message === 'ชื่อผู้ใช้นี้มีอยู่แล้ว') {
         setFormErrors({ username: 'ชื่อผู้ใช้นี้มีอยู่แล้ว' });
@@ -45,44 +46,47 @@ const Register = () => {
   };
 
   return (
-    <div className='text-[#22A094] bg-[#E2FAF8] w-full h-screen pt-40'>
-      <div className='border w-[40%] m-auto bg-white rounded-lg shadow-lg '>
-        <img className='w-36 ml-56 mt-10' src="https://i.imgur.com/yGPYlKm.png" alt="External Logo" />
+    <div className='text-[#22A094] bg-[#E2FAF8] dark:bg-[#6E6E6E] w-full h-screen pt-40'>
+      <div className='p-2 w-[30%] m-auto text-[#6e6e6ec8] bg-white dark:bg-[#2c2c2a]  dark:text-[#e7f4ef] rounded-lg shadow-lg '>
+        <div className="mx-auto w-36 mt-12"> {isDark
+          ? <img src="https://i.imgur.com/T8gF1pT.png" alt="External Logo" />
+          : <img src="https://i.imgur.com/yGPYlKm.png" alt="External Logo" />}
+        </div>
         <form
           onSubmit={hdlSubmit}
           className="flex flex-col mx-20">
-          <span className="text-[#6e6e6ec8] mt-6">ชื่อผู้ใช้</span>
+          <span className=" mt-6">ชื่อผู้ใช้</span>
           <input
-            className="border border-[#6e6e6ec1] p-2 rounded-md"
+            className="border border-[#6e6e6ec1] p-2 rounded-md  text-black dark:border-[#e7f4ef] dark:hover:bg-[#e7f4ef49]"
             name='username'
             onChange={hdlOnChange}
             value={form.username}
           />
           {formErrors.username && (
-            <span className='text-red-500 text-xs'>{formErrors.username}</span>
+            <span className='text-red-500 text-xs dark:text-[#DB5252]'>{formErrors.username}</span>
           )}
-          <span className="text-[#6e6e6ec8] mt-6">อีเมล</span>
+          <span className="mt-6">อีเมล</span>
           <input
-            className="border border-[#6e6e6ec1] p-2 rounded-md"
+            className="border border-[#6e6e6ec1] p-2 rounded-md text-black dark:border-[#e7f4ef] dark:hover:bg-[#e7f4ef49]"
             name='email'
             onChange={hdlOnChange}
             value={form.email}
           />
           {formErrors.email && (
-            <span className='text-red-500 text-xs'>{formErrors.email}</span>
+            <span className='text-red-500 text-xs dark:text-[#DB5252]'>{formErrors.email}</span>
           )}
-          <span className="text-[#6e6e6ec8] mt-6">รหัสผ่าน</span>
+          <span className="mt-6">รหัสผ่าน</span>
           <input
-            className="border border-[#6e6e6ec1] p-2 rounded-md"
+            className="border  text-black dark:border-[#e7f4ef] dark:hover:bg-[#e7f4ef49] border-[#6e6e6ec1] p-2 rounded-md"
             type="password"
             name='password'
             onChange={hdlOnChange}
             value={form.password}
           />
           {formErrors.password && (
-            <span className='text-red-500 text-xs'>{formErrors.password}</span>
+            <span className='text-red-500 text-xs dark:text-[#DB5252]'>{formErrors.password}</span>
           )}
-          <button className="border-2 border-[#22A094] rounded-md p-2 mt-8 mb-8">ลงทะเบียน</button>
+          <button className="border-2 border-[#22A094] text-[#22A094] rounded-md p-2 mt-8 mb-8 dark:border-[#e7f4ef] dark:hover:bg-[#e7f4ef49] dark:text-[#e7f4ef]">ลงทะเบียน</button>
         </form>
       </div>
     </div>

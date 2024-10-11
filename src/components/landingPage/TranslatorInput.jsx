@@ -99,7 +99,7 @@ const TranslatorInput = () => {
             {searchHis.map((item) => (
               <li
                 key={item.id}
-                className="p-2 pl-4 text-start hover:bg-gray-200 cursor-pointer flex items-center justify-between"
+                className="p-2 pl-4 text-start hover:bg-gray-200 cursor-pointer text-[#22A094] flex items-center justify-between"
                 onClick={() => setInputValue({ searchTerm: item.searchTerm })}
               >
                 {item.searchTerm}

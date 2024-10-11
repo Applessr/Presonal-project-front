@@ -27,7 +27,7 @@ const Dropdown = () => {
     <div className="relative" onMouseEnter={hdlMouseEnter} onMouseLeave={hdlMouseLeave}>
       <button
         id="dropdownDelayButton"
-        className="hover:text-[#156860] font-medium text-sm px-5 py-2.5 text-center inline-flex items-center"
+        className="hover:text-[#156860] dark:hover:text-[#b0dfd1] font-medium text-sm px-5 py-2.5 text-center inline-flex items-center"
         type="button"
       >
         ฝึกภาษาสเปน

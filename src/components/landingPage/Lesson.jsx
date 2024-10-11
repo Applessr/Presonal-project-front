@@ -50,7 +50,8 @@ const Lesson = () => {
                     return (
                         <div
                             onClick={() => hdlLessonClick(item.id)} key={item.id}
-                            className=' hover:cursor-pointer shadow-md bg-[#E2FAF8] hover:bg-[#cbf5f1] w-[18rem] h-[27rem] flex flex-col items-center rounded-lg'
+                            className=' hover:cursor-pointer shadow-md bg-[#E2FAF8] hover:bg-[#cbf5f1] w-[18rem] h-[27rem] flex flex-col items-center rounded-lg
+                            dark:bg-[#6E6E6E] dark:text-[#e7f4ef] dark:hover:bg-[#a1a1a1a1]'
                         >
                             <div className='w-[15rem] h-[15rem] overflow-hidden mt-8 rounded-lg bg-slate-200'>
                                 <img
@@ -60,14 +61,14 @@ const Lesson = () => {
                                 />
                             </div>
                             <h1 className='text-2xl mt-4 font-semibold'>{item.lessonName}</h1>
-                            <h1 className='text-[#6e6e6ec7] mt-4'>{score} score</h1>
+                            <h1 className='text-[#6e6e6ec7] dark:text-[#c4c4c4c7] mt-4'>{score} score</h1>
                         </div>
                     );
                 })}
             </div>
             <div className='mt-8'>
                 <button
-                    className='text-xl border-2 border-[#22A094] p-1 rounded-md hover:bg-[#E2FAF8]'
+                    className='text-xl border-2 border-[#22A094] p-1 rounded-md hover:bg-[#E2FAF8]  dark:border-[#e7f4ef]  dark:hover:bg-[#e7f4ef49] dark:text-[#e7f4ef]'
                     onClick={hdlLearnMore}
                 >
                     ดูบทเรียนเพิ่มเติม

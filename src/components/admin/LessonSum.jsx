@@ -13,7 +13,7 @@ const LessonSum = () => {
         getAllLesson(token)
     },[])
   return (
-    <div className="ml-10 stats shadow h-32">
+    <div className="ml-10 stats shadow h-32 dark:text-[#2C2C2A]">
     <div className="stat place-items-center">
         <div className="stat-title">Lesson</div>
         <div className="stat-value">{lesson.length}</div>

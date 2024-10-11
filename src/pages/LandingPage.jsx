@@ -7,7 +7,7 @@ import Hotvocap from '../components/landingPage/HotVocap'
 
 function LandingPage() {
   return (
-    <div className="w-full h-auto text-center text-[#22A094]">
+    <div className="w-full h-auto text-center ">
     <div
       className=" h-[25rem] flex justify-center items-center bg-cover bg-center overflow-hidden bg-slate-300"
       style={{ backgroundImage: "url('https://i.imgur.com/qLPSyHy.png')" }}

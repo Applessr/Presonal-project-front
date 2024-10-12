@@ -60,6 +60,7 @@ const guestRouter = createBrowserRouter([
             { path: 'category', element: <MainVocab/>},
             { path: 'category/:categoryId', element: <Vocabulary/>},
             { path: 'lesson', element: <UserLesson/>},
+            { path: '*', element: <PageNotFound/>}
         ],
     },
     {

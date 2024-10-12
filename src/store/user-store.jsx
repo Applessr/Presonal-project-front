@@ -54,13 +54,13 @@ const useUserStore = create(persist((set, get) => ({
       console.log("Error getAllLesson detail:", err.response?.data?.message);
     }
   },
-  getLessonId: async (token,id) => {
+  getLessonId: async (token, id) => {
     console.log('getLessonIb');
     try {
-      const result = await getLessonById(token,id);
+      const result = await getLessonById(token, id);
       console.log("Response data:", result.data.questions);
-      set({ lessonName: result.data.lessonName});
-      set({ questions: result.data.questions});
+      set({ lessonName: result.data.lessonName });
+      set({ questions: result.data.questions });
     } catch (err) {
       console.log("Error getAllLesson detail:", err.response?.data?.message);
     }
@@ -80,12 +80,12 @@ const useUserStore = create(persist((set, get) => ({
   getAllVocab: async () => {
     console.log('getAllVocab');
     try {
-      const result = await allVocab();
-      console.log(result);
-      set({ allVocabulary: res.data });
-      getRandomWord();
+      const result = await allVocab(); 
+      console.log(result); 
+      set({ allVocabulary: result.data }); 
+      getRandomWord(); 
     } catch (err) {
-      console.log("Error getAllVocab detail:", err.response?.data?.message);
+      console.log("Error getAllVocab detail:", err.response?.data?.message || err.message);
     }
   },
 

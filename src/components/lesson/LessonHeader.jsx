@@ -32,7 +32,7 @@ const LessonHeader = () => {
     }
     return (
         <div>
-            <header className='m-10 flex justify-around'>
+            <header className='m-10 pt-4 flex justify-around items-center'>
                 <div
                     onClick={hdlBack}
                     className='btn btn-ghost rounded-full w-14 h-14'>

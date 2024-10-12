@@ -144,7 +144,7 @@ const LessonById = () => {
         </div>
       ) : currentQuestion ? (
         <div>
-          <div className='flex flex-col items-center justify-center'>
+          <div className='flex flex-col items-center justify-center  text-black '>
             <span className='text-sm mb-4'>ข้อที่ {currentQuestionIndex + 1} จาก {questions.length}</span>
             <span className='text-3xl'>{currentQuestion.question}</span>
             <img className='w-[325px] h-[325px] mt-10 mb-10' src={currentQuestion.image} alt="Question" />

@@ -42,8 +42,8 @@ const Lesson = () => {
 
 
     return (
-        <div className='flex flex-col mb-14'>
-            <div className='flex gap-8 justify-center'>
+        <div className='flex flex-col mb-14 '>
+            <div className='flex gap-8 justify-center '>
                 {lesson3.map(item => {
                     const lessonProgress = allProgress.find((lesson) => lesson.lessonId === item.id);
                     const score = lessonProgress ? lessonProgress.score : 0;
@@ -51,9 +51,10 @@ const Lesson = () => {
                         <div
                             onClick={() => hdlLessonClick(item.id)} key={item.id}
                             className=' hover:cursor-pointer shadow-md bg-[#E2FAF8] hover:bg-[#cbf5f1] w-[18rem] h-[27rem] flex flex-col items-center rounded-lg
-                            dark:bg-[#6E6E6E] dark:text-[#e7f4ef] dark:hover:bg-[#a1a1a1a1]'
+                            dark:bg-[#6E6E6E] dark:text-[#e7f4ef] dark:hover:bg-[#a1a1a1a1]
+                           '
                         >
-                            <div className='w-[15rem] h-[15rem] overflow-hidden mt-8 rounded-lg bg-slate-200'>
+                            <div className='w-[15rem] h-[15rem]  overflow-hidden mt-8 rounded-lg bg-slate-200'>
                                 <img
                                     className='w-full h-full object-cover'
                                     src={item.image}

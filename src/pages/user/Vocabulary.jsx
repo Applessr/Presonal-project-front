@@ -59,7 +59,7 @@ const Vocabulary = () => {
 
                 <ul className='mt-12 '>
                     {onlyVocab.map((item) => (
-                        <li key={item.id} className='grid grid-cols-[auto,1fr] items-center mt-5 gap-2'>
+                        <li key={item.id} className='grid grid-cols-[auto,1fr] items-center mt-5 gap-2 text-black dark:text-white'>
                             <div className='flex items-center gap-8'>
                                 <div className='w-20 h-10 bg-slate-400 rounded-md overflow-hidden'>
                                     <img src={item.image} alt="pic" />

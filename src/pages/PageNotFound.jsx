@@ -1,15 +1,22 @@
 import React from 'react'
 import { useNavigate } from 'react-router-dom'
+import useAuthStore from '../store/auth-store'
 
 const PageNotFound = () => {
+  const user = useAuthStore((state) => state.user)
   const navigate = useNavigate()
 
   const hdlOnClick = () => {
-    navigate('/'); 
+    if(user) {
+      navigate('/user');
+    } else {
+      navigate('/'); 
+    }
+    
   };
   return (
     <div>
-      <section className="bg-white">
+      <section className="">
         <div className=" mx-auto max-w-screen-xl  text-[#22A094] flex flex-col items-center">
             <div className="flex text-center m-5">
               <div>

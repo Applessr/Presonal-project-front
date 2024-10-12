@@ -85,7 +85,7 @@ const TranslatorInput = () => {
     <div>
       <form onSubmit={(e) => { e.preventDefault(); hdlOnSubmit(); }}>
         <input
-          className='w-[40rem] p-4 pl-16 rounded-md border-none shadow-md bg-no-repeat bg-[length:20px] bg-[url("https://www.svgrepo.com/show/522266/search.svg")] bg-[position:12px_center] focus:outline-none'
+          className='w-[40rem] text-black p-4 pl-16 rounded-md border-none shadow-md bg-no-repeat bg-[length:20px] bg-[url("https://www.svgrepo.com/show/522266/search.svg")] bg-[position:12px_center] focus:outline-none'
           name='searchTerm'
           type="text"
           placeholder='แปลภาษาไทย หรือภาษาสเปน'

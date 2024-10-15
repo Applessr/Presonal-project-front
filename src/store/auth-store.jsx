@@ -2,7 +2,6 @@ import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 import { login, loginGoogle, register } from "../api/auth";
 import { toast } from "react-toastify";
-import axios from "axios";
 
 
 const useAuthStore = create(persist((set) => ({

@@ -23,6 +23,9 @@ import ResetPassword from '../pages/auth/ResetPassword';
 import LessonLayout from '../layout/LessonLayout';
 import Vocabulary from '../pages/user/Vocabulary';
 import FirstPage from '../pages/lesson/FirstPage';
+import Upgrade from '../pages/user/Upgrade';
+import Plan from '../pages/user/Plan';
+import PayMent from '../pages/user/PayMent';
 
 
 const guestRouter = createBrowserRouter([
@@ -60,6 +63,9 @@ const guestRouter = createBrowserRouter([
             { path: 'category', element: <MainVocab/>},
             { path: 'category/:categoryId', element: <Vocabulary/>},
             { path: 'lesson', element: <UserLesson/>},
+            { path: 'upgrade', element: <Upgrade/>},
+            { path: 'upgrade/selectplan', element: <Plan/>},
+            { path: 'upgrade/payment', element: <PayMent/>},
             { path: '*', element: <PageNotFound/>}
         ],
     },

@@ -6,7 +6,6 @@ import { useNavigate } from 'react-router-dom';
 
 const LoginGoogle = () => {
   const loginWithGoogle = useAuthStore((state) => state.loginWithGoogle);
-  const token = useAuthStore((state) => state.token);
   const navigate = useNavigate();
 
   const handleLogin = async (credentialResponse) => {
@@ -26,7 +25,7 @@ const LoginGoogle = () => {
   };
 
   return (
-    <GoogleOAuthProvider clientId="39419143806-v199ni5qi9f5dsda819hv0a1cfphp48s.apps.googleusercontent.com">
+    <GoogleOAuthProvider clientId ={import.meta.env.VITE_GOOGLE_CLIENT_ID}>
       <div className='m-auto w-[19rem] border rounded-lg'>
         <GoogleLogin
           onSuccess={handleLogin}

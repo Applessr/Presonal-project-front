@@ -4,7 +4,8 @@ import useAuthStore from "../../store/auth-store";
 
 const Dropdown = () => {
   const user = useAuthStore((state) => state.user);
-  const navigate = useNavigate(); 
+  const subscriptionStatus = useAuthStore((state) => state.subscriptionStatus);
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
   const hdlMouseEnter = () => {
@@ -17,9 +18,11 @@ const Dropdown = () => {
 
   const hdlIsLogin = (where) => {
     if (!user) {
-      document.getElementById('login_modal').showModal(); 
+      document.getElementById('login_modal').showModal();
+    } else if (!subscriptionStatus) {
+      navigate(`/user/${where}`);
     } else {
-      navigate(`/user/${where}`); 
+      navigate(`/subscript/${where}`);
     }
   };
 
@@ -27,7 +30,7 @@ const Dropdown = () => {
     <div className="relative" onMouseEnter={hdlMouseEnter} onMouseLeave={hdlMouseLeave}>
       <button
         id="dropdownDelayButton"
-        className="hover:text-[#156860] dark:hover:text-[#b0dfd1] font-medium text-sm px-5 py-2.5 text-center inline-flex items-center"
+        className="hover:text-[#307CA6] dark:hover:text-[#b0dfd1] font-medium text-sm px-5 py-2.5 text-center inline-flex items-center"
         type="button"
       >
         ฝึกภาษาสเปน

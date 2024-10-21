@@ -64,7 +64,7 @@ const LessonById = () => {
         setIsFinished(true);
         hdlScoreSubmit(newScore);
       }
-    }, 3000);
+    }, 2500);
   };
 
   const hdlScoreSubmit = async (finalScore) => {
@@ -78,14 +78,13 @@ const LessonById = () => {
     }
   };
 
-
   return (
     <div>
       {isFinished ? (
         <div className='flex flex-col items-center justify-center'>
           <h2 className='text-3xl flex items-center'>ยินดีด้วย<img className='w-16 h-16' src={pop} alt="Congratulations" /></h2>
           <p className='text-xl mb-4'>คะแนนของคุณคือ {score} คะแนนจาก {questions.length}</p>
-          <div className="overflow-x-auto w-[30rem] bg-secondary text-primary rounded-lg mb-10">
+          <div className="overflow-x-auto w-[30rem] bg-[#E2FAF8] text-primary rounded-lg mb-10">
             <table className="table text-lg flex-1">
               <thead>
                 <tr>
@@ -96,35 +95,35 @@ const LessonById = () => {
               </thead>
               <tbody className='bg-white'>
                 {allScore[0] && allScore[0].user && (
-                  <tr key={allScore[0].id} className="text-black dark:text-white text-center">
+                  <tr key={allScore[0].id} className="text-black text-center">
                     <th><img className='w-12 h-12' src="https://i.imgur.com/jpFXWtu.png" alt="gold-medal" /></th>
                     <td className='text-xl text-primary'>"{allScore[0].user.username}"</td>
                     <td>{allScore[0].score}</td>
                   </tr>
                 )}
                 {allScore[1] && allScore[1].user && (
-                  <tr key={allScore[1].id} className="text-black dark:text-white text-center">
+                  <tr key={allScore[1].id} className="text-black text-center">
                     <th><img className='w-11 h-11' src="https://i.imgur.com/4DOKN4o.png" alt="gold-medal" /></th>
                     <td className='text-xl'>{allScore[1].user.username}</td>
                     <td>{allScore[1].score}</td>
                   </tr>
                 )}
                 {allScore[2] && allScore[2].user && (
-                  <tr key={allScore[2].id} className="text-black dark:text-white text-center">
+                  <tr key={allScore[2].id} className="text-black text-center">
                     <th><img className='w-9 h-9' src="https://i.imgur.com/RqG6jhE.png" alt="gold-medal" /></th>
                     <td>{allScore[2].user.username}</td>
                     <td>{allScore[2].score}</td>
                   </tr>
                 )}
                 {allScore[3] && allScore[3].user && (
-                  <tr key={allScore[3].id} className="text-black dark:text-white">
+                  <tr key={allScore[3].id} className="text-black text-center">
                     <th>4</th>
                     <td>{allScore[3].user.username}</td>
                     <td>{allScore[3].score}</td>
                   </tr>
                 )}
                 {allScore[4] && allScore[4].user && (
-                  <tr key={allScore[4].id} className="text-black dark:text-white">
+                  <tr key={allScore[4].id} className="text-black text-center">
                     <th>5</th>
                     <td>{allScore[4].user.username}</td>
                     <td>{allScore[4].score}</td>
@@ -133,8 +132,7 @@ const LessonById = () => {
               </tbody>
             </table>
           </div>
-          
-
+        
           <button
             className='p-2 border-2 border-primary text-primary text-xl rounded-lg'
             onClick={() => navigate('/user/lesson')}
@@ -153,7 +151,7 @@ const LessonById = () => {
             {['option1', 'option2'].map(option => (
               <button
                 key={option}
-                className={`p-2 border-2 border-[#6E6E6E] text-xl flex gap-2 rounded-lg ${buttonState[option] === 'correct' ? 'bg-[#E2FAF8] text-[#22A094] border-[#22A094]' : buttonState[option] === 'incorrect' ? 'bg-[#E8A1A1] text-[#DB5252] border-[#DB5252]' : 'text-[#6E6E6E]'}`}
+                className={`p-2 border-2 border-[#6E6E6E] dark:border-[#8d8c8c] dark:text-[#8d8c8c] text-xl flex gap-2 rounded-lg ${buttonState[option] === 'correct' ? 'bg-[#E2FAF8] text-[#22A094] border-[#22A094]' : buttonState[option] === 'incorrect' ? 'bg-[#E8A1A1] text-[#DB5252] border-[#DB5252]' : 'text-[#6E6E6E]'}`}
                 onClick={() => handleAnswer(option)}
                 disabled={isAnswered}
               >

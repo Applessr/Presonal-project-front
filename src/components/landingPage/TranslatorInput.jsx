@@ -14,15 +14,15 @@ const TranslatorInput = () => {
   const clearSearchHis = useUserStore((state) => state.clearSearchHis);
   const deleteSearch = useUserStore((state) => state.deleteSearch);
   const searchHis = useUserStore((state) => state.searchHis);
-  const [inputValue, setInputValue] = useState(initialState);
-  const [showHistory, setShowHistory] = useState(false);
+  const subscriptionStatus = useAuthStore((state) => state.subscriptionStatus);
   const navigate = useNavigate();
 
-
+  const [inputValue, setInputValue] = useState(initialState);
+  const [showHistory, setShowHistory] = useState(false);
 
   useEffect(() => {
     if (user === null) {
-      clearSearchHis(); 
+      clearSearchHis();
     } else {
       getSearchHis();
     }
@@ -51,12 +51,15 @@ const TranslatorInput = () => {
         await createSearch(token, inputValue);
       }
       
-      const url = user
-        ? `/user/translate?text=${encodeURIComponent(inputValue.searchTerm)}&sourceLang=th&targetLang=es`
-        : `/translate?text=${encodeURIComponent(inputValue.searchTerm)}&sourceLang=th&targetLang=es`;
-      
+      const url =
+        (subscriptionStatus === 'ACTIVE')
+          ? `/subscript/translate?text=${encodeURIComponent(inputValue.searchTerm)}&sourceLang=th&targetLang=es`
+          : user
+            ? `/user/translate?text=${encodeURIComponent(inputValue.searchTerm)}&sourceLang=th&targetLang=es`
+            : `/translate?text=${encodeURIComponent(inputValue.searchTerm)}&sourceLang=th&targetLang=es`;
+
       navigate(url);
-      
+
       setInputValue(initialState);
       setShowHistory(false);
     } catch (err) {
@@ -73,9 +76,10 @@ const TranslatorInput = () => {
     }, 200);
   };
 
-  const hdlDelete = async(id) => {
+  const hdlDelete = async (id) => {
     try {
       await deleteSearch(token, id);
+      getSearchHis();
     } catch (err) {
       console.log('error in hdlDelete', err);
     }
@@ -103,9 +107,9 @@ const TranslatorInput = () => {
                 onClick={() => setInputValue({ searchTerm: item.searchTerm })}
               >
                 {item.searchTerm}
-                <div 
-                onClick={()=> hdlDelete(item.id)}
-                className='hover:bg-slate-300 flex items-center justify-center w-10 h-10 rounded-full mr-2'>
+                <div
+                  onClick={() => hdlDelete(item.id)}
+                  className='hover:bg-slate-300 flex items-center justify-center w-10 h-10 rounded-full mr-2'>
                   <FaTrash className='h-6 text-[#DB5252]' />
                 </div>
               </li>

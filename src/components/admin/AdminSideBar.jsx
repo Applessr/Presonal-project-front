@@ -5,13 +5,16 @@ import { IoLogOutOutline, IoSettingsOutline } from "react-icons/io5";
 import { TbVocabulary } from "react-icons/tb";
 import useAuthStore from '../../store/auth-store';
 import { useNavigate } from 'react-router-dom';
+import useProgressStore from '../../store/progress-store';
 
 const AdminSideBar = () => {
   const navigate = useNavigate();
   const actionLogout = useAuthStore((state) => state.actionLogout);
+  const clearProgress = useProgressStore((state) => state.clearProgress);
 
   const hdlLogout = () => {
     actionLogout();
+    clearProgress();
     navigate('/');
   };
 

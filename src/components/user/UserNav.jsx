@@ -10,7 +10,7 @@ const UserNav = () => {
   const navigate = useNavigate()
 
   return (
-    <div className='flex w-full fixed bg-white dark:bg-[#2C2C2A] dark:text-[#e7f4ef] '>
+    <div className='flex w-full fixed bg-white z-10 dark:bg-[#2C2C2A] dark:text-[#e7f4ef] '>
       <div className='w-full items-center h-14'>
         <div className='mx-24 flex justify-between'>
           <div className='w-36 overflow-hidden self-center'>

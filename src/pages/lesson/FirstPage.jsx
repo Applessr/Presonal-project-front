@@ -10,7 +10,7 @@ const FirstPage = () => {
     useEffect(() => {
         if (countdown === 0) {
 
-            navigate(`/lesson/${lessonId}/${questionId}`);
+            navigate(`/lesson/${lessonId}/question`);
         }
         const timer = setInterval(() => {
             setCountdown((prev) => prev - 1);

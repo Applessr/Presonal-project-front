@@ -26,6 +26,15 @@ import FirstPage from '../pages/lesson/FirstPage';
 import Upgrade from '../pages/user/Upgrade';
 import Plan from '../pages/user/Plan';
 import PayMent from '../pages/user/PayMent';
+import SubscriptLayout from '../layout/SubscriptLayout';
+import SubscriptLesson from '../pages/subscript/SubscriptLesson';
+import Greetings from '../pages/subscript/Greetings';
+import Letters from '../pages/subscript/Letters';
+import PayMentSuccess from '../pages/user/PayMentSuccess';
+import Presente from '../pages/subscript/Presente';
+import Basic from '../pages/subscript/Basic';
+import TellingTime from '../pages/subscript/TellingTime';
+import Verb from '../pages/subscript/Verb';
 
 
 const guestRouter = createBrowserRouter([
@@ -45,7 +54,7 @@ const guestRouter = createBrowserRouter([
     },
     {
         path : '/admin',
-        element: <ProtectRoute element={<AdminLayout/>} allow={["ADMIN"]}/>,
+        element: <ProtectRoute element={<AdminLayout/>} allow={["ADMIN"]} />,
         children: [
             { index: true, element: <Dashboard/>},
             { path: 'manages', element: <ManageUser/>},
@@ -54,7 +63,7 @@ const guestRouter = createBrowserRouter([
     },
     {
         path : '/user',
-        element: <ProtectRoute element={< UserLayout/>} allow={["USER","ADMIN"]}/>,
+        element: <ProtectRoute element={< UserLayout/>} allow={["USER","ADMIN"]}  requireSubscription={false}/>,
         children: [
             { index: true, element: <LandingPage/>},
             { path: 'translate', element: <Translator/>},
@@ -70,11 +79,33 @@ const guestRouter = createBrowserRouter([
         ],
     },
     {
+        path : '/subscript',
+        element: <ProtectRoute element={< SubscriptLayout/>} allow={["USER","ADMIN"]}  requireSubscription={true}/>,
+        children: [
+            { index: true, element: <LandingPage/>},
+            { path: 'success', element: <PayMentSuccess/>},
+            { path: 'translate', element: <Translator/>},
+            { path: 'user-favorite', element: <UserFavorite/>},
+            { path: 'user-edit-profile', element: <UserEditProfile/>},
+            { path: 'category', element: <MainVocab/>},
+            { path: 'category/:categoryId', element: <Vocabulary/>},
+            { path: 'lesson', element: <UserLesson/>},
+            { path: 'video', element: <SubscriptLesson/>},
+            { path: 'greetings', element: <Greetings/>},
+            { path: 'letters', element: <Letters/>},
+            { path: 'presente', element: <Presente/>},
+            { path: 'basic', element: <Basic/>},
+            { path: 'telling-time', element: <TellingTime/>},
+            { path: 'verb', element: <Verb/>},
+            { path: '*', element: <PageNotFound/>}
+        ],
+    },
+    {
         path : 'lesson/:lessonId',
-        element: <ProtectRoute element={< LessonLayout/>} allow={["USER","ADMIN"]}/>,
+        element: <ProtectRoute element={< LessonLayout/>} allow={["USER","ADMIN"]} />,
         children: [
             { index: true, element: <FirstPage/>},
-            { path: ':questionId', element: <LessonById/>},
+            { path: 'question', element: <LessonById/>},
         ],
     },
 ]);

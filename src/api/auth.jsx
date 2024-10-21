@@ -17,7 +17,7 @@ export const ResetPassword = (token,newPassword) =>
     axios.post('http://localhost:5000/auth/reset-password',{token: token, newPassword: newPassword});
 
 export const currentUser = (token) => {
-    return axios.post('http://localhost:5000/auth/current-user',{},{
+    return axios.get('http://localhost:5000/auth/current-user',{
         headers: {
             Authorization: `Bearer ${token}`
         }

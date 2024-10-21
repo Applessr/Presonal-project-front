@@ -76,19 +76,6 @@ const useUserStore = create(persist((set, get) => ({
       console.log("Error getCategory detail:", err.response?.data?.message);
     }
   },
-
-  getAllVocab: async () => {
-    console.log('getAllVocab');
-    try {
-      const result = await allVocab(); 
-      console.log(result); 
-      set({ allVocabulary: result.data }); 
-      getRandomWord(); 
-    } catch (err) {
-      console.log("Error getAllVocab detail:", err.response?.data?.message || err.message);
-    }
-  },
-
   getRandomWord: () => {
     const { allVocabulary } = get();
     const lastDate = localStorage.getItem('lastRandomDate');
@@ -101,7 +88,20 @@ const useUserStore = create(persist((set, get) => ({
       localStorage.setItem('lastRandomDate', today);
     }
   },
+  getAllVocab: async () => {
+    console.log('getAllVocab');
+    try {
+      const result = await allVocab();
+      console.log(result);
+      set({ allVocabulary: result.data });
 
+      const { getRandomWord } = get();
+      getRandomWord();
+
+    } catch (err) {
+      console.log("Error getAllVocab detail:", err.response?.data?.message || err.message);
+    }
+  },
   getVocabulary: async (token, categoryId) => {
     console.log('getCategory');
     try {
@@ -129,6 +129,7 @@ const useUserStore = create(persist((set, get) => ({
       return result;
     } catch (err) {
       console.log("Error upDateUserProfile detail:", err.response?.data?.message || err.message);
+      throw new Error(err.response?.data?.message || err.message); 
     }
   },
 

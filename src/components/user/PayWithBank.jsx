@@ -3,6 +3,7 @@ import useAuthStore from '../../store/auth-store';
 import useSubscriptionStore from '../../store/subscription-store';
 import { toast } from "react-toastify";
 import Script from "react-load-script";
+import { useNavigate } from 'react-router-dom';
 
 
 let OmiseCard;
@@ -12,6 +13,8 @@ const PayWithBank = () => {
     const createBankSubscript = useSubscriptionStore((state) => state.createBankSubscript);
       const plan = useSubscriptionStore((state) => state.plan);
     const [loading, setLoading] = useState(false);
+    const navigate = useNavigate();
+    const currentUserStore = useAuthStore((state)=> state.currentUserStore)
 
     const priceMap = {
         ONE_MONTH: 99 * 100,
@@ -58,6 +61,8 @@ const PayWithBank = () => {
             const result = await createBankSubscript(token, plan, omiseToken);
             console.log("Subscription:", result);
             toast.success("Payment Successful!");
+            currentUserStore(token);
+            navigate('/subscript/success');
         } catch (error) {
             console.error("Payment Error:", error);
             toast.error(`Payment Failed: ${error.message}`);

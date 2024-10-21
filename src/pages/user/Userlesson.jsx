@@ -4,6 +4,7 @@ import useAuthStore from '../../store/auth-store';
 import Footer from '../../components/Footer';
 import { useNavigate } from 'react-router-dom';
 import useProgressStore from '../../store/progress-store';
+import { motion } from "framer-motion";
 
 const UserLesson = () => {
   const token = useAuthStore((state) => state.token);
@@ -33,7 +34,10 @@ const UserLesson = () => {
           const lessonProgress = allProgress.find((lesson) => lesson.lessonId === item.id);
           const score = lessonProgress ? lessonProgress.score : 0;
           return (
-            <div onClick={() => hdlLessonClick(item.id)} key={item.id} className=' dark:bg-[#6E6E6E] dark:text-[#e7f4ef] dark:hover:bg-[#a1a1a1a1] bg-[#E2FAF8] hover:bg-[#cbf5f1] w-[18rem] h-[27rem] flex flex-col items-center rounded-lg shadow-md'>
+            <motion.div
+              whileHover={{ scale: [null, 1.2, 1.1] }}
+              transition={{ duration: 0.3 }}
+              onClick={() => hdlLessonClick(item.id)} key={item.id} className=' dark:bg-[#6E6E6E] dark:text-[#e7f4ef] dark:hover:bg-[#a1a1a1a1] bg-[#E2FAF8] hover:bg-[#cbf5f1] w-[18rem] h-[27rem] flex flex-col items-center rounded-lg shadow-md'>
               <div className='w-[15rem] h-[15rem] overflow-hidden mt-8 rounded-lg bg-slate-200'>
                 <img
                   className='w-full h-full object-cover'
@@ -43,13 +47,15 @@ const UserLesson = () => {
               </div>
               <h1 className='text-2xl mt-4 font-semibold'>{item.lessonName}</h1>
               <h1 className='text-[#6e6e6ec7] dark:text-[#c9c3c3c7] mt-4'>{score} score</h1>
-              <div className='w-[80%] mt-8 bg-white rounded-full h-3 mb-4'>
-                <div
-                  className='bg-[#22A094] h-3 rounded-full'
-                  style={{ width: '0%' }} >
-                </div>
+              <div className='mt-2'>
+                {score === 0 ?
+                  (
+                    <img className='w-20' src="https://i.imgur.com/ciZE6Tg.png" alt="" />
+                  ) : (
+                    <img className='w-20' src="https://i.imgur.com/vuWnJig.png" alt="" />
+                  )}
               </div>
-            </div>
+            </motion.div>
           )
         })}
       </div>

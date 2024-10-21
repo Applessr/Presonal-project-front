@@ -1,10 +1,11 @@
 import React, { useEffect } from 'react';
 import Footer from '../../components/Footer';
-import { HiOutlineStar, HiStar } from "react-icons/hi2"; 
+import { HiOutlineStar, HiStar } from "react-icons/hi2";
 import useUserStore from '../../store/user-store';
 import { useParams } from 'react-router-dom';
 import useAuthStore from '../../store/auth-store';
-import { ImTelegram } from 'react-icons/im';
+import { AiOutlineSound } from "react-icons/ai";
+import ScrollToTop from '../../components/ScrollToTop';
 
 const Vocabulary = () => {
     const token = useAuthStore((state) => state.token);
@@ -17,17 +18,17 @@ const Vocabulary = () => {
     const { categoryId } = useParams();
 
     const onlyVocab = vocabulary?.vocabulary || [];
-    
-   
+
+
     const isFavorite = (vocabularyId) => {
         return favorite.some((item) => item.vocabularyId === vocabularyId);
     };
 
     const handleFavoriteToggle = async (vocabularyId) => {
         if (isFavorite(vocabularyId)) {
-            await deleteFavoriteVocab(token, vocabularyId); 
+            await deleteFavoriteVocab(token, vocabularyId);
         } else {
-            await createFavoriteVocab(token, vocabularyId); 
+            await createFavoriteVocab(token, vocabularyId);
         }
         await getFavoriteVocab(token);
     };
@@ -42,6 +43,13 @@ const Vocabulary = () => {
     if (!vocabulary) {
         return <span className="loading loading-dots loading-lg"></span>;
     }
+
+    const listenToTranslation = (text, lang) => {
+        const word = new SpeechSynthesisUtterance(text);
+        word.lang = lang === 'es' ? 'es-ES' : 'th-TH';
+        speechSynthesis.speak(word);
+    };
+
 
     return (
         <div className='pt-20 min-h-screen'>
@@ -61,20 +69,27 @@ const Vocabulary = () => {
                     {onlyVocab.map((item) => (
                         <li key={item.id} className='grid grid-cols-[auto,1fr] items-center mt-5 gap-2 text-black dark:text-white'>
                             <div className='flex items-center gap-8'>
-                                <div className='w-20 h-10 bg-slate-400 rounded-md overflow-hidden'>
+                                <div className='w-20 h-12 bg-slate-400 rounded-md overflow-hidden'>
                                     <img src={item.image} alt="pic" />
                                 </div>
+                                <span
+                                    className='w-12 h-12 rounded-full flex items-center justify-center active:bg-slate-300 '
+                                    onClick={()=>listenToTranslation(item.wordEs, 'es') }
+                                >
+                                    <AiOutlineSound className='w-7 h-7 active:text-black cursor-pointer' />
+                                </span>
                                 <span className='text-xl font-medium'>{item.wordEs}</span>
                             </div>
                             <div className='flex justify-between items-center ml-2 gap-2'>
                                 <span>{item.wordTh}</span>
-                                <div 
-                                className='hover:scale-110 hover:cursor-pointer'
-                                onClick={() => handleFavoriteToggle(item.id)}>
+                             
+                                <div
+                                    className='hover:scale-110 hover:cursor-pointer'
+                                    onClick={() => handleFavoriteToggle(item.id)}>
                                     {isFavorite(item.id) ? (
-                                        <HiStar className='w-7 h-7 text-[#f3de6b]' /> // ไอคอน star ถ้าเป็น favorite
+                                        <HiStar className='w-7 h-7 text-[#f3de6b]' /> 
                                     ) : (
-                                        <HiOutlineStar className='w-7 h-7 text-[#6E6E6E]' /> // ไอคอน outline ถ้าไม่เป็น favorite
+                                        <HiOutlineStar className='w-7 h-7 text-[#6E6E6E]' /> 
                                     )}
                                 </div>
                             </div>
@@ -82,6 +97,7 @@ const Vocabulary = () => {
                     ))}
                 </ul>
             </div>
+            <ScrollToTop/>
             <Footer />
         </div>
     );

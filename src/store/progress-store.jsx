@@ -54,6 +54,9 @@ const useProgressStore = create(persist((set) => ({
             console.log('Error detail:', err.response.data.message)
         }
     },
+    clearProgress: () => {
+        set({ allProgress: [] });
+    }
 }), {
     name: 'progress-store',
     storage: createJSONStorage(() => localStorage)

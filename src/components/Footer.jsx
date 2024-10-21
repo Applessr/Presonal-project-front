@@ -6,7 +6,7 @@ const Footer = () => {
   const isDark = useAuthStore((state) => state.isDark);
   return (
 
-    <footer className="footer bg-secondary text-primary py-10 mt-10 px-40 dark:bg-[#6E6E6E] dark:text-[#e7f4ef]">
+    <footer className="footer bg-[#E2FAF8] text-primary py-10 mt-10 px-40 dark:bg-[#6E6E6E] dark:text-[#e7f4ef]">
       <aside>
         {isDark
           ? <img className='h-28' src="https://i.imgur.com/J3pmCQT.png" alt="" />

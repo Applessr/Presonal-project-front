@@ -11,14 +11,13 @@ const loginSchema = Joi.object({
             "string.empty": "Email is required if username is not provided"
           }),
         Joi.string()
-          .pattern(/^[0-9a-zA-Z]{3,}$/)
+          .pattern(/^[0-9a-zA-Z]{3,40}$/)
           .messages({
             "string.pattern.base": "Username must contain only letters (a-z, A-Z) and numbers (0-9) and be at least 3 characters long",
             "string.empty": "Username is required if email is not provided"
           })
       )
       .required(),
-  
     password: Joi.string()
       .required()
       .min(6)

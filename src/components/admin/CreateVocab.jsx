@@ -51,13 +51,11 @@ const CreateVocab = (props) => {
             if (!body) {
                 toast.error('all input is require')
             }
-            if (!token) {
-                toast.error('token is require')
-            }
+            
             await adminCreateVocabulary(token, categoryId, body)
             toast.success('สร้างคำศัพท์ใหม่เรียบร้อยแล้ว')
             adminVocabulary(token, categoryId)
-            
+
             setBody(initialState)
             document.getElementById('create_modal').close();
         } catch (err) {
@@ -75,29 +73,29 @@ const CreateVocab = (props) => {
                 <h3 className="font-semibold text-primary text-xl mb-4">Crete new vocabulary</h3>
                 <button className="btn btn-sm text-xl btn-circle btn-ghost absolute right-2 top-2" onClick={e => (e.target.closest('dialog').close())}>✕</button>
                 {loading ? (<span className="loading loading-ring loading-lg"></span>
-                ) : (<form onSubmit={hdlSubmit} className='flex flex-col w-[24rem] gap-4 p-2'>
+                ) : (<form onSubmit={hdlSubmit} className='flex flex-col w-[24rem] gap-4 p-2 '>
                     <span> Word in thai </span>
                     <input
                         onChange={hdlOnChange}
                         name='wordTh'
                         value={body.wordTh}
                         type="text"
-                        className='text-black w-full ml-2 border border-gray-400 p-2 rounded-lg' />
+                        className='text-black w-full border border-gray-400 p-2 rounded-lg' />
                     <span> Word in Spanish </span>
                     <input
                         onChange={hdlOnChange}
                         name='wordEs'
                         value={body.wordEs}
                         type="text"
-                        className='text-black ml-2 border border-gray-400 p-2 rounded-lg' />
+                        className='text-black w-full border border-gray-400 p-2 rounded-lg' />
                     <span> Image URL </span>
                     <input
                         onChange={hdlOnChange}
                         name='image'
                         value={body.image}
                         type="text"
-                        className='text-black ml-2 border border-gray-400 p-2 rounded-lg' />
-                    <button className="btn text-primary hover:bg-secondary border-2 border-primary ">Create</button>
+                        className='text-black w-full  border border-gray-400 p-2 rounded-lg' />
+                    <button className="btn  w-[23rem] self-center text-primary hover:bg-secondary border-2 border-primary ">Create</button>
                 </form>)}
             </div>
         </dialog>

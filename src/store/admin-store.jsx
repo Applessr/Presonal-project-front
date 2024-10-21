@@ -1,13 +1,13 @@
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
-import { adminCreateVocab, adminDeleteVocab, adminEditUserRole, adminEditVocab, adminGetUser, adminGetVocabulary } from "../api/admin";
+import { adminCreateVocab, adminDeleteVocab, adminEditUserRole, adminEditVocab, adminGetSearch, adminGetUser, adminGetVocabulary } from "../api/admin";
 
 
 
 const useAdminStore = create(persist((set) => ({
     userInfo: [],
     adminVocab: [],
-    allScore: [],
+    allSearch: [],
     adminGetUserInfo: async (token) => {
         try {
             const result = await adminGetUser(token);
@@ -56,6 +56,15 @@ const useAdminStore = create(persist((set) => ({
             console.log(result, 'adminEditVocabulary');
         } catch (err) {
             console.log('Error detail:', err.response?.data?.message || err.message);
+        }
+    },
+    adminGetAllSearch: async (token) => {
+        try {
+            const result = await adminGetSearch(token);
+            set({ allSearch: result.data.allSearch });
+            console.log(result.data.allSearch, 'adminGetAllSearch');
+        } catch (err) {
+            console.log('Error detail:', err.response.data.message || err.message);
         }
     },
 

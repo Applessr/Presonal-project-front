@@ -47,3 +47,10 @@ export const adminEditVocab = (token, vocabularyId, body) => {
     });
 };
 
+export const adminGetSearch = (token) => {
+    return axios.get('http://localhost:5000/admin/user-search', {
+        headers: {
+            Authorization: `Bearer ${token}`
+        }
+    });
+};

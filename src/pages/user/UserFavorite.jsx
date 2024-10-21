@@ -3,6 +3,7 @@ import Footer from '../../components/Footer';
 import useUserStore from '../../store/user-store';
 import useAuthStore from '../../store/auth-store';
 import { HiOutlineStar, HiStar } from "react-icons/hi2";
+import { AiOutlineSound } from "react-icons/ai";
 
 const UserFavorite = () => {
   const token = useAuthStore((state) => state.token);
@@ -21,7 +22,7 @@ const UserFavorite = () => {
 
   const isFavorite = (vocabularyId) => {
     return favorite.some((item) => item.vocabularyId === vocabularyId);
-   
+
   };
 
   const handleFavoriteToggle = async (vocabularyId) => {
@@ -31,11 +32,18 @@ const UserFavorite = () => {
       } else {
         await createFavoriteVocab(token, vocabularyId);
       }
-      await getFavoriteVocab(token); 
+      await getFavoriteVocab(token);
     } catch (err) {
       console.error('Error toggling favorite:', err);
     }
   };
+
+  const listenToTranslation = (text, lang) => {
+    const word = new SpeechSynthesisUtterance(text);
+    word.lang = lang === 'es' ? 'es-ES' : 'th-TH';
+    speechSynthesis.speak(word);
+  };
+
 
   return (
     <div className='pt-20 min-h-screen'>
@@ -48,6 +56,12 @@ const UserFavorite = () => {
                 <div className='w-20 h-10 bg-slate-400 rounded-md overflow-hidden'>
                   <img src={item.vocabulary.image} alt="pic" />
                 </div>
+                <span
+                  className='w-12 h-12 rounded-full flex items-center justify-center active:bg-slate-300 '
+                  onClick={() => listenToTranslation(item.vocabulary.wordEs, 'es')}
+                >
+                  <AiOutlineSound className='w-7 h-7 active:text-black cursor-pointer' />
+                </span>
                 <span className='text-xl font-medium'>{item.vocabulary.wordEs}</span>
               </div>
               <div className='flex justify-between items-center ml-2 gap-2'>

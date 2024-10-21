@@ -3,6 +3,7 @@ import useUserStore from '../../store/user-store';
 import useAuthStore from '../../store/auth-store';
 import { useNavigate } from 'react-router-dom';
 import Footer from '../../components/Footer';
+import { motion } from "framer-motion";
 
 const MainVocab = () => {
   const token = useAuthStore((state) => state.token);
@@ -27,7 +28,7 @@ const MainVocab = () => {
   const food = category.slice(9, 12);
   const common = category.slice(12);
 
-  console.log('all',allVocabulary )
+  console.log('all', allVocabulary)
 
   const countWordsInCategory = (categoryId) => {
     return allVocabulary.filter(item => item.categoryId === categoryId).length;
@@ -48,7 +49,10 @@ const MainVocab = () => {
           <span className='text-2xl mt-4'>วัน</span>
           <div className='mt-6 flex gap-6'>
             {day.map(item => (
-              <div onClick={() => hdlVocabClick(item.id)} key={item.id} className='rounded-xl bg-[#E2FAF8] hover:bg-[#cbf5f1] w-[20rem] h-[9rem] flex items-center mb-4 dark:bg-[#6E6E6E] dark:text-[#e7f4ef] dark:hover:bg-[#a1a1a1a1]'>
+              <motion.div
+                whileHover={{ scale: [null, 1.2, 1.1] }}
+                transition={{ duration: 0.3 }}
+                onClick={() => hdlVocabClick(item.id)} key={item.id} className='rounded-xl bg-[#E2FAF8] hover:bg-[#cbf5f1] w-[20rem] h-[9rem] flex items-center mb-4 dark:bg-[#6E6E6E] dark:text-[#e7f4ef] dark:hover:bg-[#a1a1a1a1]'>
                 <div className='overflow-hidden m-4 rounded-xl h-[7rem] w-[7rem] bg-slate-200'>
                   <img className='w-full h-full object-cover' src={item.image} alt={item.name} />
                 </div>
@@ -56,7 +60,7 @@ const MainVocab = () => {
                   <h1 className='text-2xl mt-4 font-semibold'>{item.name}</h1>
                   <h1 className='text-[#6e6e6ec7] dark:text-[#bfc5bdc7]  mt-4'>{countWordsInCategory(item.id)} คำศัพท์</h1>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -64,7 +68,10 @@ const MainVocab = () => {
           <span className='text-2xl mt-4'>สัตว์</span>
           <div className='mt-6 flex gap-6'>
             {animal.map(item => (
-              <div onClick={() => hdlVocabClick(item.id)} key={item.id} className='rounded-xl bg-[#E2FAF8] hover:bg-[#cbf5f1] w-[20rem] h-[9rem] flex items-center mb-4 dark:bg-[#6E6E6E] dark:text-[#e7f4ef] dark:hover:bg-[#a1a1a1a1]'>
+              <motion.div
+                whileHover={{ scale: [null, 1.2, 1.1] }}
+                transition={{ duration: 0.3 }}
+                onClick={() => hdlVocabClick(item.id)} key={item.id} className='rounded-xl bg-[#E2FAF8] hover:bg-[#cbf5f1] w-[20rem] h-[9rem] flex items-center mb-4 dark:bg-[#6E6E6E] dark:text-[#e7f4ef] dark:hover:bg-[#a1a1a1a1]'>
                 <div className='overflow-hidden m-4 rounded-xl h-[7rem] w-[7rem] bg-slate-200'>
                   <img className='w-full h-full object-cover' src={item.image} alt={item.name} />
                 </div>
@@ -72,7 +79,7 @@ const MainVocab = () => {
                   <h1 className='text-2xl mt-4 font-semibold'>{item.name}</h1>
                   <h1 className='text-[#6e6e6ec7] dark:text-[#bfc5bdc7] mt-4'>{countWordsInCategory(item.id)} คำศัพท์</h1>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -80,7 +87,10 @@ const MainVocab = () => {
           <span className='text-2xl mt-4'>ศิลปะ</span>
           <div className='mt-6 flex gap-6'>
             {art.map(item => (
-              <div onClick={() => hdlVocabClick(item.id)} key={item.id} className='rounded-xl bg-[#E2FAF8] hover:bg-[#cbf5f1] w-[20rem] h-[9rem] flex items-center mb-4 dark:bg-[#6E6E6E] dark:text-[#e7f4ef] dark:hover:bg-[#a1a1a1a1]'>
+              <motion.div
+                whileHover={{ scale: [null, 1.2, 1.1] }}
+                transition={{ duration: 0.3 }}
+                onClick={() => hdlVocabClick(item.id)} key={item.id} className='rounded-xl bg-[#E2FAF8] hover:bg-[#cbf5f1] w-[20rem] h-[9rem] flex items-center mb-4 dark:bg-[#6E6E6E] dark:text-[#e7f4ef] dark:hover:bg-[#a1a1a1a1]'>
                 <div className='overflow-hidden m-4 rounded-xl h-[7rem] w-[7rem] bg-slate-200'>
                   <img className='w-full h-full object-cover' src={item.image} alt={item.name} />
                 </div>
@@ -88,7 +98,7 @@ const MainVocab = () => {
                   <h1 className='text-2xl mt-4 font-semibold'>{item.name}</h1>
                   <h1 className='text-[#6e6e6ec7] dark:text-[#bfc5bdc7] mt-4'>{countWordsInCategory(item.id)} คำศัพท์</h1>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -96,7 +106,10 @@ const MainVocab = () => {
           <span className='text-2xl mt-4'>ตัวเลข</span>
           <div className='mt-6 flex gap-6'>
             {number.map(item => (
-              <div onClick={() => hdlVocabClick(item.id)} key={item.id} className='rounded-xl bg-[#E2FAF8] hover:bg-[#cbf5f1] w-[20rem] h-[9rem] flex items-center mb-4 dark:bg-[#6E6E6E] dark:text-[#e7f4ef] dark:hover:bg-[#a1a1a1a1]'>
+              <motion.div
+                whileHover={{ scale: [null, 1.2, 1.1] }}
+                transition={{ duration: 0.3 }}
+                onClick={() => hdlVocabClick(item.id)} key={item.id} className='rounded-xl bg-[#E2FAF8] hover:bg-[#cbf5f1] w-[20rem] h-[9rem] flex items-center mb-4 dark:bg-[#6E6E6E] dark:text-[#e7f4ef] dark:hover:bg-[#a1a1a1a1]'>
                 <div className='overflow-hidden m-4 rounded-xl h-[7rem] w-[7rem] bg-slate-200'>
                   <img className='w-full h-full object-cover' src={item.image} alt={item.name} />
                 </div>
@@ -104,7 +117,7 @@ const MainVocab = () => {
                   <h1 className='text-2xl mt-4 font-semibold'>{item.name}</h1>
                   <h1 className='text-[#6e6e6ec7] dark:text-[#bfc5bdc7] mt-4'>{countWordsInCategory(item.id)} คำศัพท์</h1>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -112,7 +125,10 @@ const MainVocab = () => {
           <span className='text-2xl mt-4'>อาหาร</span>
           <div className='mt-6 flex gap-6'>
             {food.map(item => (
-              <div onClick={() => hdlVocabClick(item.id)} key={item.id} className='rounded-xl bg-[#E2FAF8] dark:bg-[#6E6E6E] dark:text-[#e7f4ef] dark:hover:bg-[#a1a1a1a1] hover:bg-[#cbf5f1] w-[20rem] h-[9rem] flex items-center mb-4'>
+              <motion.div
+                whileHover={{ scale: [null, 1.2, 1.1] }}
+                transition={{ duration: 0.3 }}
+                onClick={() => hdlVocabClick(item.id)} key={item.id} className='rounded-xl bg-[#E2FAF8] dark:bg-[#6E6E6E] dark:text-[#e7f4ef] dark:hover:bg-[#a1a1a1a1] hover:bg-[#cbf5f1] w-[20rem] h-[9rem] flex items-center mb-4'>
                 <div className='overflow-hidden m-4 rounded-xl h-[7rem] w-[7rem] bg-slate-200'>
                   <img className='w-full h-full object-cover' src={item.image} alt={item.name} />
                 </div>
@@ -120,7 +136,7 @@ const MainVocab = () => {
                   <h1 className='text-2xl mt-4 font-semibold'>{item.name}</h1>
                   <h1 className='text-[#6e6e6ec7] dark:text-[#bfc5bdc7] mt-4'>{countWordsInCategory(item.id)} คำศัพท์</h1>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -128,7 +144,10 @@ const MainVocab = () => {
           <span className='text-2xl mt-4'>ประโยคทั่วไป</span>
           <div className='mt-6 flex flex-wrap gap-6'>
             {common.map(item => (
-              <div onClick={() => hdlVocabClick(item.id)} key={item.id} className='rounded-xl bg-[#E2FAF8] dark:bg-[#6E6E6E] dark:text-[#e7f4ef] dark:hover:bg-[#a1a1a1a1] hover:bg-[#cbf5f1] w-[20rem] h-[9rem] flex items-center mb-4'>
+              <motion.div
+                whileHover={{ scale: [null, 1.2, 1.1] }}
+                transition={{ duration: 0.3 }}
+                onClick={() => hdlVocabClick(item.id)} key={item.id} className='rounded-xl bg-[#E2FAF8] dark:bg-[#6E6E6E] dark:text-[#e7f4ef] dark:hover:bg-[#a1a1a1a1] hover:bg-[#cbf5f1] w-[20rem] h-[9rem] flex items-center mb-4'>
                 <div className='overflow-hidden m-4 rounded-xl h-[7rem] w-[7rem] bg-slate-200'>
                   <img className='w-full h-full object-cover' src={item.image} alt={item.name} />
                 </div>
@@ -136,7 +155,7 @@ const MainVocab = () => {
                   <h1 className='text-2xl mt-4 font-semibold'>{item.name}</h1>
                   <h1 className='text-[#6e6e6ec7] dark:text-[#bfc5bdc7] mt-4'>{countWordsInCategory(item.id)} คำศัพท์</h1>
                 </div>
-              </div>
+              </motion.div>
             ))}
           </div>
         </div>

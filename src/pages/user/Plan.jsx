@@ -34,7 +34,7 @@ const Plan = () => {
 
     return (
         <div className='pt-14'>
-            <div className='flex flex-col items-center mt-6'>
+            <div className='flex flex-col items-center mt-24'>
                 <div className='w-36'>
                     {isDark ? (
                         <img src="https://i.imgur.com/T8gF1pT.png" alt="External Logo" />
@@ -86,7 +86,7 @@ const Plan = () => {
                 </div>
 
                 <button
-                    className='btn border-2 hover:bg-[#E2FAF8] dark:hover:bg-[#e7f4ef49] mt-4'
+                    className='btn border-2 hover:bg-[#E2FAF8] dark:hover:bg-[#e7f4ef49] mt-4 text-xl'
                     onClick={handleConfirmPlan}
                 >
                     เลือกแพ็คเกจนี้

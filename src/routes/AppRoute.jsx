@@ -59,6 +59,7 @@ const guestRouter = createBrowserRouter([
             { index: true, element: <Dashboard/>},
             { path: 'manages', element: <ManageUser/>},
             { path: 'vocabulary', element: <ManageVocap/>},
+            { path: '*', element: <PageNotFound/>},
         ],
     },
     {

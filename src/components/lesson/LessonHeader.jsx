@@ -11,24 +11,32 @@ const LessonHeader = () => {
     const getLessonId = useUserStore((state) => state.getLessonId);
     const lessonName = useUserStore((state) => state.lessonName);
     const questions = useUserStore((state) => state.questions);
+    const user = useAuthStore((state) => state.user);
+    const subscriptionStatus = useAuthStore((state) => state.subscriptionStatus);
+    
     const navigate = useNavigate();
 
     useEffect(() => {
         if (token && lessonId) {
-          getLessonId(token, lessonId);
+            getLessonId(token, lessonId);
         }
-      }, [token, lessonId, getLessonId]);
-    
+    }, [token, lessonId, getLessonId]);
+
 
     const hdlBack = (e) => {
         e.preventDefault();
         document.getElementById('back_modal').showModal();
-   
+
     }
     const hdlConfirmBack = () => {
-
         document.getElementById('back_modal').close();
-        navigate('/user/lesson')
+        if (!user) {
+            document.getElementById('login_modal').showModal();
+        } else if (subscriptionStatus === 'ACTIVE') {
+            navigate(`/subscript/lesson`);
+        } else {
+            navigate('/user/lesson');
+        }
     }
     return (
         <div>

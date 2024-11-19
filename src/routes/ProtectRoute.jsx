@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react'
 import useAuthStore from '../store/auth-store'
 import { Navigate } from 'react-router-dom'
-import Unauthorization from '../pages/Unauthorized'
 
 const ProtectRoute = ({ element, allow, requireSubscription }) => {
     const [isAllowed, setIsAllowed] = useState(null);

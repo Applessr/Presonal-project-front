@@ -10,7 +10,8 @@ import useProgressStore from '../../store/progress-store';
 const LessonById = () => {
   const { lessonId } = useParams();
   const token = useAuthStore((state) => state.token);
-  const navigate = useNavigate();
+  const user = useAuthStore((state) => state.user);
+  const subscriptionStatus = useAuthStore((state) => state.subscriptionStatus);
   const getLessonId = useUserStore((state) => state.getLessonId);
   const questions = useUserStore((state) => state.questions);
   const getAllUser = useProgressStore((state) => state.getAllUser);
@@ -19,6 +20,8 @@ const LessonById = () => {
   const redoUserScore = useProgressStore((state) => state.redoUserScore);
   const getOneScore = useProgressStore((state) => state.getOneScore);
   const thisLessonScore = useProgressStore((state) => state.thisLessonScore);
+
+  const navigate = useNavigate();
 
   const [currentQuestionIndex, setCurrentQuestionIndex] = useState(0);
   const [score, setScore] = useState(0);
@@ -78,6 +81,16 @@ const LessonById = () => {
     }
   };
 
+  const hdlBack = () => {
+    if (!user) {
+      document.getElementById('login_modal').showModal();
+    } else if (subscriptionStatus === 'ACTIVE') {
+      navigate(`/subscript/lesson`);
+    } else {
+      navigate('/user/lesson');
+    }
+  }
+
   return (
     <div>
       {isFinished ? (
@@ -132,10 +145,9 @@ const LessonById = () => {
               </tbody>
             </table>
           </div>
-        
           <button
             className='p-2 border-2 border-primary text-primary text-xl rounded-lg'
-            onClick={() => navigate('/user/lesson')}
+            onClick={hdlBack}
           >
             กลับสู่หน้าหลัก
           </button>
@@ -164,7 +176,7 @@ const LessonById = () => {
       ) : (
         <span>Loading...</span>
       )}
-      
+
     </div>
   );
 };

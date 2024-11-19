@@ -16,7 +16,6 @@ const LoginGoogle = () => {
     document.getElementById('login_modal').close();
     console.log(decoded);
 
- 
     if (token) {
       navigate('/user'); 
     } else {

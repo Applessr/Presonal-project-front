@@ -59,30 +59,18 @@ const Login = () => {
     if (role) {
       const result = await currentUserStore(data.token); 
       
-      if (role=== 'ADMIN') {
+      if (role === 'ADMIN') {
       navigate('/admin')
     } else if (result.data.member.Subscription?.status !== 'ACTIVE') {
       navigate('/user')
     } else {
       navigate('/subscript')
     }
-  
+    
     }
     setForm(initialState);
     setFormErrors({});
   };
-
-
-  const roleRedirect = (role, updatedSubscriptionStatus) => {
-    console.log(role)
-    if (role === 'ADMIN') {
-      navigate('/admin')
-    } else if (updatedSubscriptionStatus !== 'ACTIVE') {
-      navigate('/user')
-    } else {
-      navigate('/subscript')
-    }
-  }
 
   const closeModal = () => {
     document.getElementById('login_modal').close()

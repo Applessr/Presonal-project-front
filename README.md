@@ -25,6 +25,17 @@ For users who are logged in, the app provides additional features that enhance t
 - **Nodemailer**: Used for sending verification emails, password resets, and notifications to users.
 - **Mysql**: Database for storing user information, translation history, and vocabulary lists.
 
+## ENV
+
+VITE_API_KEY
+
+VITE_OMISE_PUBLIC_KEY
+
+VITE_OMISE_SECRET_KEY
+
+VITE_GOOGLE_CLIENT_ID
+
+
 
    
 

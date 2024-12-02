@@ -1,56 +1,30 @@
-# Personal project Spanify
----
-### env guide
+# Spanify Thai-Spanish Translation App
 
-PORT = 5000 
+## Project Description
 
-DATABASE = "mysql://u:pw@localhost:3306/cc18_fakebook"
+The **Thai-Spanish Translation App** is a web application that enables users to translate text between **Thai** and **Spanish** without requiring them to log in. The app is designed to offer **immediate access** to translations for general users.
 
-JWT_SECRET
+For users who are logged in, the app provides additional features that enhance the language learning experience:
+- **Save Search History**: Users can save their translation history and revisit previous translations.
+- **Language Lessons**: The app includes interactive lessons to help users improve their language skills.
+- **Vocabulary Management**: Users can create, organize, and review custom vocabulary lists.
 
----
-### Service
+## Features
 
-# API ENDPOINT GUIDELINE
+- **Instant Translation**: Translate between Thai and Spanish without the need to log in.
+- **Search History**: Logged-in users can save their translation history for future reference.
+- **Custom Vocabulary**: Users can add and manage their own vocabulary lists for better learning.
+- **Learning Lessons**: Interactive lessons to improve Spanish and Thai language skills.
 
-<br>
+## Technologies Used
 
-# /user
-
-| Name     | Endpoint  | Method | Request Body                                                                                                                                                         | Response Body                                                                                                                                    | Response Status Code | Remark           |
-|----------|-----------|--------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------------------------------------|----------------------|------------------|
-| Register | /register  | POST   | `{ email: "", password: "", confirmPassword: "", firstName: "", lastName: "", phone: "" }`                                                                           | `{ id: "", email: "", firstName: "", lastName: "", phone: "" }`                                                                                  | 201                  | สร้างบัญชีผู้ใช้งาน  |
-| Login    | /login     | POST   | `{ email: "", password: "" }`                                                                                                                                       | `{ id: "", email: "", firstName: "", lastName: "", phone: "", accessToken: "" }`| 200                  | เข้าสู่ระบบได้       |
-
-<hr>
-
-<br>
-<br>
-<br>
+- **React**: Frontend development for dynamic user interface.
+- **Express**: Backend development for handling requests and APIs.
+- **OAuth2**: Authentication mechanism for secure user login and session management.
+- **Omise**: Integrated payment gateway for premium features, such as access to advanced language lessons or custom translations.
+- **Nodemailer**: Used for sending verification emails, password resets, and notifications to users.
+- **Mysql**: Database for storing user information, translation history, and vocabulary lists.
 
 
-# /account
+   
 
-| Name            | Endpoint        | Method | Request Body                                                                 | Response Body                                                                                                      | Response Status Code | Remark               |
-|-----------------|-----------------|--------|------------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------------------|----------------------|----------------------|
-| Create account  | /               | POST   | `{ accountTypeId: "", accountName: "", amount? }`                            | `{ id: "", userId: "", accountTypeId: "", accountName: "", amount: "", deletedAt: "" }`                            | 201                  | Authenticate token   |
-| Get all accounts| /               | GET    | -                                                                            | `[ { id: "", userId: "", accountTypeId: "", accountName: "", amount: "", deletedAt: "" } ]`                        | 200                  | Authenticate token   |
-| Update account  | /:accountId     | PATCH  | `{ accountTypeId?: "", accountName?: "", amount?: "" }`                      | `{ accountTypeId?: "", accountName?: "", amount?: "" }`                                                            | 200                  | Authenticate token   |
-| Delete account  | /:accountId     | DELETE | -                                                                            | -                                                                                                                 | 204                  | ปิดการใช้งานบัญชีโดยไม่ได้ลบบัญชีจริง  |
-
-
-<hr>
-
-<br>
-<br>
-<br>
-
-# /account/:accountId/transaction/
-
-| Name                          | Endpoint        | Method | Request Body                                                                                                 | Response Body                                                                                                          | Response Status Code | Remark                          |
-|-------------------------------|-----------------|--------|--------------------------------------------------------------------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------|----------------------|---------------------------------|
-| Create transaction             | /               | POST   | `{ senderId?, receiverId?, transactionType, amount, payeeName?, transactionDate?, description? }`             | `{ id, senderId?, receiverId?, transactionType, amount, payeeName?, transactionDate?, description? }`                  | 201                  | Authenticate token              |
-| Get all transactions by account id | /               | GET    | -                                                                                                            | `[ {id, senderId?, receiverId?, transactionType, amount, payeeName?, transactionDate?, description? } ]`               | 200                  | ให้ดึงข้อมูล transaction ทั้งหมดตามแต่ละ account |
-| Edit transaction               | /:transactionId | PUT    | `{ senderId, receiverId, amount, description, payerName, transactionType, transactionDate }`                 | `{ id, senderId?, receiverId?, transactionType, amount, payeeName? }`                                                  | 200                  | ให้อัปเดตตัวใดตัวหนึ่งหรือทั้งหมดก็ได้          |
-| Delete transaction             | /:transactionId | DELETE | -                                                                                                            | -                                                                                                                     | 204                  |                                 |
-<hr>
